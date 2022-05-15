@@ -18,4 +18,11 @@
 @import url(../blocks/profile/__info/_discription/profile__info_discription.css);
 @import url(../blocks/profile/__button/profile__button.css);
 
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__description/element__description.css);
+@import url(../blocks/element/__text/element__text.css);
+@import url(../blocks/element/__heart/element__heart.css);
+
 @import url(../blocks/footer/footer.css);

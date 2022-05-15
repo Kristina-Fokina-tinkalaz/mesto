@@ -1,0 +1,15 @@
+.elements{
+    display: grid;
+    grid-template-columns:33% 33% 33%;
+    grid-template-rows:auto;
+    column-gap: 17px;
+    row-gap: 20px;
+    max-width:880px;
+    margin:50px auto 0 auto;
+}
+@media screen and (max-width:768px) {
+    .elements{
+        grid-template-columns:100%;
+        margin: 36px 19px 0 19px;
+    }
+}
