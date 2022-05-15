@@ -1,4 +1,5 @@
 @import url(../vendor/normalize.css);
+@import url(../vendor/inter.css);
 
 @import url(../blocks/body/body.css);
 @import url(../blocks/page/page.css);
@@ -8,5 +9,13 @@
 @import url(../blocks/header/__line/header__line.css);
 
 @import url(../blocks/main/main.css);
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__info/_name/profile__info_name.css);
+@import url(../blocks/profile/__info/_editbutton/profile__info_editbutton.css);
+@import url(../blocks/profile/__info/_discription/profile__info_discription.css);
+@import url(../blocks/profile/__button/profile__button.css);
 
 @import url(../blocks/footer/footer.css);
