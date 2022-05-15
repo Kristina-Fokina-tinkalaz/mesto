@@ -26,3 +26,12 @@
 @import url(../blocks/element/__heart/element__heart.css);
 
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__text/footer__text.css);
+
+@import url(../blocks/popup/popup.css);
+
+@import url(../blocks/edit-form/edit-form.css);
+@import url(../blocks/edit-form/__title/edit-form__title.css);
+@import url(../blocks/edit-form/__input/edit-form__input.css);
+@import url(../blocks/edit-form/__button/edit-form__button.css);
+@import url(../blocks/close-icon/close-icon.css);
