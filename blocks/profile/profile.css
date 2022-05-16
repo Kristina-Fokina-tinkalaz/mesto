@@ -1,4 +1,6 @@
 .profile{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin-top:80px;
 }

@@ -1,5 +1,9 @@
 .element__description{
     margin:25px 15px 31px 21px;
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 }

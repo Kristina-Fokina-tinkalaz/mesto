@@ -5,12 +5,10 @@
     border-radius: 2px;
     padding:14px 64px;
     margin:auto 0 auto auto;
-
 }
 .profile__button:hover{
     opacity: 0.6;
     cursor: pointer;
-
 }
 @media screen and (max-width:1024px) {
     .profile__button{
@@ -21,6 +19,8 @@
     .profile__button{
         width: 16px;
         height: 16px;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         margin: 0 auto;
         padding:17px 134px;
