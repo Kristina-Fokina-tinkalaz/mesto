@@ -2,12 +2,10 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin-top:80px;
+    margin-top:40px;
 }
 @media screen and (max-width:768px) {
     .profile{
-        margin-top:73px;
         display: block;
-        margin-top:42px;
     }
 }
