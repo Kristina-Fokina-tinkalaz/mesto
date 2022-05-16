@@ -1,11 +1,11 @@
-let profile__info_editbutton = document.querySelector(".profile__info_editbutton");
+let profile__editbutton = document.querySelector(".profile__editbutton");
 let popup = document.querySelector(".popup");
 
 function openPopup() {
     popup.classList.add("popup_opened");
 }
 
-profile__info_editbutton.addEventListener("click", openPopup);
+profile__editbutton.addEventListener("click", openPopup);
 
 let closeIcon = document.querySelector(".close-icon");
 function closePopup() {
@@ -26,11 +26,11 @@ function formSubmitHandler(evt) {
 
     // Получите значение полей jobInput и nameInput из свойства value
 
-    let profile__info_name = document.querySelector(".profile__info_name");
-    let profile__info_discription = document.querySelector(".profile__info_discription");
+    let profile__name = document.querySelector(".profile__name");
+    let profile__discription = document.querySelector(".profile__discription");
 
-    profile__info_name.textContent = nameInput.value;
-    profile__info_discription.textContent = jobInput.value;
+    profile__name.textContent = nameInput.value;
+    profile__discription.textContent = jobInput.value;
     popup.classList.remove("popup_opened");
 }
 
