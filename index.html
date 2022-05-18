@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <title>Места России</title>
         <link rel="stylesheet" href="pages/index.css" />
     </head>
@@ -12,69 +11,58 @@
         <div class="page">
             <header class="header">
                 <img class="header__logo" src="images/Vector.png" alt="Место России" />
-                <div class="header__line"></div>
             </header>
             <main class="main">
                 <div class="profile">
                     <img class="profile__avatar" src="images/avatar.jpg" alt="Аватарка" />
                     <div class="profile__info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <img src="images/editbutton.png" class="profile__editbutton" alt="Редактировать" />
+                        <button type="button" class="profile__editbutton"></button>
                         <p class="profile__discription">Исследователь океана</p>
                     </div>
-                    <img src="images/addbutton.png" class="profile__button" alt="Добавить" />
+                    <button type="button" class="profile__button"></button>
                 </div>
-                <div class="popup">
-                    <form class="edit-form">
-                        <h2 class="edit-form__title">Редактировать профиль</h2>
-                        <input class="edit-form__input" type="text" name="name" id="name" value="Жак-Ив Кусто" />
-                        <input class="edit-form__input" type="text" name="description" id="description" value="Исследователь океана" />
-                        <button class="edit-form__button">Сохранить</button>
-                        <button class="close-icon"></button>
-                    </form>
-                </div>
-
                 <div class="elements">
                     <div class="element">
                         <img src="images/kirill-pershin-1088404-unsplash.jpg" class="element__image" alt="Карачаевск" />
                         <div class="element__description">
-                            <p class="element__text">Карачаевск</p>
-                            <div class="element__heart"></div>
+                            <h2 class="element__text">Карачаевск</h2>
+                            <button type="button" class="element__heart"></button>
                         </div>
                     </div>
                     <div class="element">
                         <img src="images/kirill-pershin-1404681-unsplash.png" class="element__image" alt="Гора Эльбрус" />
                         <div class="element__description">
-                            <p class="element__text">Гора Эльбрус</p>
-                            <div class="element__heart"></div>
+                            <h2 class="element__text">Гора Эльбрус</h2>
+                            <button type="button" class="element__heart"></button>
                         </div>
                     </div>
                     <div class="element">
                         <img src="images/kirill-pershin-1556355-unsplash.png" class="element__image" alt="Домбай" />
                         <div class="element__description">
-                            <p class="element__text">Домбай</p>
-                            <div class="element__heart"></div>
+                            <h2 class="element__text">Домбай</h2>
+                            <button type="button" class="element__heart"></button>
                         </div>
                     </div>
                     <div class="element">
                         <img src="images/kirill-pershin-1556355-unsplash.png" class="element__image" alt="Домбай" />
                         <div class="element__description">
-                            <p class="element__text">Домбай</p>
-                            <div class="element__heart"></div>
+                            <h2 class="element__text">Домбай</h2>
+                            <button type="button" class="element__heart"></button>
                         </div>
                     </div>
                     <div class="element">
                         <img src="images/kirill-pershin-1404681-unsplash.png" class="element__image" alt="Карачаевск" />
                         <div class="element__description">
-                            <p class="element__text">Карачаевск</p>
-                            <div class="element__heart"></div>
+                            <h2 class="element__text">Карачаевск</h2>
+                            <button type="button" class="element__heart"></button>
                         </div>
                     </div>
                     <div class="element">
                         <img src="images/kirill-pershin-1088404-unsplash.jpg" class="element__image" alt="Карачаево-Черкесск" />
                         <div class="element__description">
-                            <p class="element__text">Карачаево-Черкесск</p>
-                            <div class="element__heart"></div>
+                            <h2 class="element__text">Карачаево-Черкесск</h2>
+                            <button type="button" class="element__heart"></button>
                         </div>
                     </div>
                 </div>
@@ -82,7 +70,16 @@
             <footer class="footer">
                 <p class="footer__text">© 2020 Mesto Russia</p>
             </footer>
+            <div class="popup">
+                <form name="change_name" method="get" class="edit-form" action="index.html">
+                    <h2 class="edit-form__title">Редактировать профиль</h2>
+                    <input class="edit-form__input" type="text" name="name" id="name" />
+                    <input class="edit-form__input" type="text" name="description" id="description" />
+                    <button type="submit" class="edit-form__button">Сохранить</button>
+                    <button type="reset" class="close-icon"></button>
+                </form>
+            </div>
         </div>
-        <script src="pages/script.js"></script>
+        <script src="scripts/index.js"></script>
     </body>
 </html>

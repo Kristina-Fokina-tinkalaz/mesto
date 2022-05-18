@@ -1,11 +1,12 @@
-.profile{
+.profile {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin-top:40px;
+    margin-top: 40px;
 }
+
 @media screen and (max-width:768px) {
-    .profile{
+    .profile {
         display: block;
     }
 }

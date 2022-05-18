@@ -1,6 +1,6 @@
-.edit-form__input{
+.edit-form__input {
     width: -webkit-fill-available;
-    margin:0 36px 17px 36px;
+    margin: 0 36px 17px 36px;
     border-top: 0;
     border-left: 0;
     border-right: 0;
@@ -10,11 +10,13 @@
     line-height: 17px;
     padding-bottom: 13px;
 }
-.edit-form__input:focus{
+
+.edit-form__input:focus {
     outline: 0;
 }
+
 @media screen and (max-width:768px) {
-    .edit-form__input{
-        margin:0 22px 17px 22px;
+    .edit-form__input {
+        margin: 0 22px 17px 22px;
     }
 }

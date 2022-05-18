@@ -1,23 +1,25 @@
-.close-icon{
+.close-icon {
     position: absolute;
     background-image: url(../../images/Close-Icon.png);
     background-color: rgba(0,0,0,0);
-    width:32px;
+    width: 32px;
     height: 32px;
-    right:-40px;
-    top:-40px;
+    right: -40px;
+    top: -40px;
     border: 0;
     background-size: cover;
 }
-.close-icon:hover{
+
+.close-icon:hover {
     cursor: pointer;
-    opacity: 0.6;
+    opacity: .6;
 }
+
 @media screen and (max-width:768px) {
-    .close-icon{
-        width:20px;
+    .close-icon {
+        width: 20px;
         height: 20px;
-        right:0;
-        top:-36px;
+        right: 0;
+        top: -36px;
     }
 }
