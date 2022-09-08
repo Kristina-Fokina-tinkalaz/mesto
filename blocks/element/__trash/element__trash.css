@@ -1,0 +1,9 @@
+.element__trash{
+    position: absolute;
+    top:20px;
+    right: 20px;
+    width:18px;
+    height: 18px;
+    cursor: pointer;
+}
+
