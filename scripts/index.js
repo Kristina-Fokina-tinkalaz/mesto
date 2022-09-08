@@ -73,8 +73,8 @@ function closePopup() {
 
 
 function openPopupImg(evt) {
-  const imgGalery = document.querySelector('.popup__galery_item_img');
-  const text = document.querySelector(".popup__galery_item_text");
+  const imgGalery = document.querySelector('.popup__img');
+  const text = document.querySelector(".popup__text");
   popupImg.classList.add("popup__opened");
   console.log(evt.target);
   imgGalery.src =  evt.target.src ;
