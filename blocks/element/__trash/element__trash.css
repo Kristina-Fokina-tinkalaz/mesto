@@ -4,6 +4,8 @@
     right: 20px;
     width:18px;
     height: 18px;
+}
+.element__trash:hover{
+    opacity: .6;
     cursor: pointer;
 }
-

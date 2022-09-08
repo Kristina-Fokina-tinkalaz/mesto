@@ -1,4 +1,4 @@
-const popup = document.querySelector(".popup");
+const popupEdit = document.querySelector("#popup__edit");
 const popupAdd = document.querySelector("#popup__add");
 const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
@@ -55,7 +55,7 @@ initialCards.forEach(function(item) {
 });
 
 function openPopup() {
-    popup.classList.add("popup__opened");
+    popupEdit.classList.add("popup__opened");
     nameInput.value = profileName.textContent;
     jobInput.value = profileDiscription.textContent;
 }
@@ -66,7 +66,7 @@ function openPopupAdd(){
 }
 
 function closePopup() {
-    popup.classList.remove("popup__opened");
+    popupEdit.classList.remove("popup__opened");
     popupAdd.classList.remove("popup__opened");
     popupImg.classList.remove("popup__opened");
 }
