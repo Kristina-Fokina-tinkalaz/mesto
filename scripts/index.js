@@ -41,7 +41,7 @@ function addEvtsElement(){
     heart.addEventListener("click", changeHeart)
   });
   buttonsTrash.forEach(function(button){
-    button.addEventListener("click", trashCard)
+    button.addEventListener("click", deleteCard)
   });
   elementButtons.forEach(function(item){
     item.addEventListener("click", openPopupImg)
@@ -80,7 +80,7 @@ function openPopupImg(evt) {
   text.textContent = evt.target.alt;;
 }
 
-function handlerSubmitForm(evt) {
+function handleSubmitForm(evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileDiscription.textContent = jobInput.value;
@@ -89,7 +89,7 @@ function handlerSubmitForm(evt) {
 function renderCard(evt) {
   evt.preventDefault();
   elements.prepend(createCard(formAdd.name.value, formAdd.link.value));
-  addEvtsElement();
+  //addEvtsElement(); Так не работают кнопки на новых карточках. Я не понимаю почему. Помогите, пожалуйста
   closePopup(evt);
 }
 
@@ -97,7 +97,7 @@ function changeHeart(heart) {
   heart.target.classList.toggle("element__heart_change");
 }
 
-function trashCard(evt){
+function deleteCard(evt){
   evt.target.closest(".element").remove();
 }
 
@@ -107,7 +107,7 @@ iconsClose.forEach(function(item){
   item.addEventListener("click", closePopup)
 });
 
-formElement.addEventListener("submit", handlerSubmitForm);
+formElement.addEventListener("submit", handleSubmitForm);
 formAdd.addEventListener("submit", renderCard);
 mestoButtonAdd.addEventListener("click", openPopupAdd);
 
