@@ -30,6 +30,8 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
 
+@import url(../blocks/overlay/overlay.css);
+
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__opened/popup__opened.css);
 @import url(../blocks/popup/__galery/popup__galery.css);

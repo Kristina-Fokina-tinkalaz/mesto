@@ -22,31 +22,21 @@ const elementButtons = elements.querySelectorAll(".element__image");
 
 function createCard(name, link){
   const element = elementsContent.querySelector(".element").cloneNode(true);
- 
+  const heart = element.querySelector(".element__heart");
+  const buttonsTrash = element.querySelector(".element__trash");
+  const elementButton = element.querySelector(".element__image");
+
+  
   element.querySelector(".element__image").src = link;
   element.querySelector(".element__image").alt = name;
   element.querySelector(".element__text").textContent = name;
 
-  addEvtsElement();
-
+  heart.addEventListener("click", changeHeart);
+  buttonsTrash.addEventListener("click", deleteCard);
+  elementButton.addEventListener("click", openPopupImg);
   return element;
 }
 
-function addEvtsElement(){
-  const hearts = document.querySelectorAll(".element__heart");
-  const buttonsTrash = elements.querySelectorAll(".element__trash");
-  const elementButtons = elements.querySelectorAll(".element__image");
-  
-  hearts.forEach(function(heart){
-    heart.addEventListener("click", changeHeart)
-  });
-  buttonsTrash.forEach(function(button){
-    button.addEventListener("click", deleteCard)
-  });
-  elementButtons.forEach(function(item){
-    item.addEventListener("click", openPopupImg)
-  });
-}
 
 initialCards.forEach(function( item ) {
   const cardReturn = createCard(item.name, item.link);
@@ -89,7 +79,6 @@ function handleSubmitForm(evt) {
 function renderCard(evt) {
   evt.preventDefault();
   elements.prepend(createCard(formAdd.name.value, formAdd.link.value));
-  //addEvtsElement(); Так не работают кнопки на новых карточках. Я не понимаю почему. Помогите, пожалуйста
   closePopup(evt);
 }
 
