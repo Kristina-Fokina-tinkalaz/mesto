@@ -4,20 +4,21 @@ const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
 const profileDiscription = profile.querySelector(".profile__discription");
 const profileEditbutton = profile.querySelector(".profile__editbutton");
-const formElement = document.querySelector("#form_edit");
-const formAdd = document.querySelector("#form_add");
-const nameInput = formElement.querySelector("#name");
-const nameInputAdd = formAdd.querySelector("#name_add");
-const jobInput = formElement.querySelector("#description");
-const linkInput = formAdd.querySelector("#link");
+
+const formEdit = document.forms.form_edit;
+const nameInput = formEdit.elements.name;
+const jobInput = formEdit.elements.description;
+
+const formAdd = document.forms.add_cart;
+const nameInputAdd = formAdd.elements.name;
+const linkInput = formAdd.elements.link;
+
 const iconsClose = document.querySelectorAll(".close-icon");
 const elements = document.querySelector(".elements");
 const elementsContent = document.querySelector(".elements").content;
 const mestoButtonAdd = profile.querySelector(".profile__button");
 const popupImg = document.querySelector("#popup__galery");
 const elementButtons = elements.querySelectorAll(".element__image");
-
-
 
 
 function createCard(name, link){
@@ -96,10 +97,11 @@ iconsClose.forEach(function(item){
   item.addEventListener("click", closePopup)
 });
 
-formElement.addEventListener("submit", handleSubmitForm);
+formEdit.addEventListener("submit", handleSubmitForm);
 formAdd.addEventListener("submit", renderCard);
 mestoButtonAdd.addEventListener("click", openPopupAdd);
 
 elementButtons.forEach(function(item){
   item.addEventListener("click", openPopupImg)
 });
+
