@@ -8,6 +8,7 @@ const profileEditbutton = profile.querySelector(".profile__editbutton");
 const formEdit = document.forms.form_edit;
 const nameInput = formEdit.elements.name;
 const jobInput = formEdit.elements.description;
+const buttonEdit = formEdit.elements.button;
 
 const formAdd = document.forms.add_cart;
 const nameInputAdd = formAdd.elements.name;
@@ -77,6 +78,19 @@ function handleSubmitForm(evt) {
     profileDiscription.textContent = jobInput.value;
     popupEdit.classList.remove("popup__opened");
 }
+
+function setSubmitButtonState(isFormValid){
+  if ( isFormValid ) {
+    buttonEdit.removeAttribute('disabled');
+    buttonEdit.classList.remove('edit-form__button_disabled');
+  }
+  else {
+    buttonEdit.setAttribute('disabled', true);
+    buttonEdit.classList.add('edit-form__button_disabled');
+  }
+
+}
+
 function renderCard(evt) {
   evt.preventDefault();
   elements.prepend(createCard(formAdd.name.value, formAdd.link.value));
@@ -105,3 +119,7 @@ elementButtons.forEach(function(item){
   item.addEventListener("click", openPopupImg)
 });
 
+formEdit.addEventListener('input', function(evt){
+    const isValid = nameInput.value.length > 0 && jobInput.value.length > 0 ;
+    setSubmitButtonState(isValid);
+});
