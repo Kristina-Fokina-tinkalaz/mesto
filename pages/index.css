@@ -38,11 +38,15 @@
 @import url(../blocks/popup/__img/popup__img.css);
 @import url(../blocks/popup/__text/popup__text.css);
 
-@import url(../blocks/edit-form/edit-form.css);
-@import url(../blocks/edit-form/__title/edit-form__title.css);
-@import url(../blocks/edit-form/__input/edit-form__input.css);
-@import url(../blocks/edit-form/__button/edit-form__button.css);
-@import url(../blocks/edit-form/__button/_disabled/edit-form__button_disabled.css);
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__button/_disabled/form__button_disabled.css);
+@import url(../blocks/form/__container/form__container.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__massage-correct/form__massage-correct.css);
+@import url(../blocks/form/__massage-error/form__massage-error.css);
+@import url(../blocks/form/__title/form__title.css);
 
 @import url(../blocks/close-icon/close-icon.css);
 

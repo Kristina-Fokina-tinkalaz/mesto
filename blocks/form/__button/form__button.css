@@ -1,5 +1,5 @@
-.edit-form__button {
-    margin: 30px 36px 36px 36px;
+.form__button {
+    margin: 10px 36px 36px 36px;
     height: 50px;
     background-color: #000;
     border-radius: 2px;
@@ -12,14 +12,14 @@
     border: 0;
 }
 
-.edit-form__button:hover {
+.form__button:hover {
     opacity: .8;
     cursor: pointer;
 }
 
 @media screen and (max-width:768px) {
-    .edit-form__button {
-        margin: 30px 22px 25px 22px;
+    .form__button {
+        margin: 10px 22px 25px 22px;
         font-size: 14px;
         line-height: 17px;
     }

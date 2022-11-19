@@ -37,20 +37,32 @@
                 <p class="footer__text">© 2020 Mesto Russia</p>
             </footer>
             <div class="popup" id="popup__edit">
-                <form name="form_edit" method="get" class="edit-form" action="index.html" id="form_edit">
-                    <h2 class="edit-form__title">Редактировать профиль</h2>
-                    <input class="edit-form__input" type="text" name="name" id="name" />
-                    <input class="edit-form__input" type="text" name="description" id="description" />
-                    <button name="button" type="submit" class="edit-form__button">Сохранить</button>
+                <form name="form" method="get" class="form" action="index.html" id="form_edit" novalidate>
+                    <h2 class="form__title">Редактировать профиль</h2>
+                    <div class="form__container">
+                        <input class="form__input" type="text" name="name" id="name_edit" minlength="2" maxlength="40" required/>
+                        <span class="form__massage-correct" id="name-error"></span>
+                    </div>
+                    <div class="form__container">
+                        <input class="form__input" type="text" name="description" id="description" minlength="2" maxlength="200" required/>
+                        <span class="form__input-correct" id="description-error"></span>
+                    </div>
+                    <button name="button" type="submit" class="form__button">Сохранить</button>
                     <button type="reset" class="close-icon"></button>
                 </form>
             </div>
             <div class="popup" id="popup__add">
-                <form name="add_cart" method="get" class="edit-form" action="index.html" id="form_add">
-                    <h2 class="edit-form__title">Новое место</h2>
-                    <input class="edit-form__input" type="text" name="name" id="name_add" placeholder="Название" />
-                    <input class="edit-form__input" type="text" name="link" id="link" placeholder="Ссылка на картинку"/>
-                    <button type="submit" class="edit-form__button" >Создать</button>
+                <form name="addCart" method="get" class="form" action="index.html" id="form_add" novalidate>
+                    <h2 class="form__title">Новое место</h2>
+                    <div class="form__container">
+                        <input class="form__input" type="text" name="nameAdd" id="name_add" placeholder="Название" minlength="2" maxlength="30" required/>
+                        <span class="form__input-correct" id="nameAdd-error"></span>
+                    </div>
+                    <div class="form__container">
+                        <input class="form__input" type="url" name="link" id="link" placeholder="Ссылка на картинку" required/>
+                        <span class="form__input-correct" id="link-error"></span>
+                    </div>
+                        <button name="button" type="submit" class="form__button form__button_disabled" disabled >Создать</button>
                     <button type="reset" class="close-icon"></button>
                 </form>
             </div>

@@ -1,22 +1,20 @@
-.edit-form__input {
+.form__input-error{
+    border-bottom: 1px solid #FF0000;
     width: -webkit-fill-available;
-    margin: 0 36px 17px 36px;
+    margin: 0 36px 30px 36px;
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     padding-bottom: 13px;
 }
-
-.edit-form__input:focus {
+.form__input-error:focus {
     outline: 0;
 }
-
 @media screen and (max-width:768px) {
-    .edit-form__input {
-        margin: 0 22px 17px 22px;
+    .form__input-error {
+        margin: 0 22px 30px 22px;
     }
 }
