@@ -53,14 +53,14 @@ function openPopupEdit() {
     openPopup(popupEdit);
     nameInput.value = profileName.textContent;
     jobInput.value = profileDiscription.textContent;
-    hideInputError (nameInput, formEdit) ;
-    hideInputError (jobInput, formEdit) ;
+    hideInputError(nameInput, formEdit) ;
+    hideInputError(jobInput, formEdit) ;
 }
 function openPopupAdd(){
     openPopup(popupAdd);
     formAdd.reset();
-    hideInputError (nameInputAdd, formAdd) ;
-    hideInputError (linkInput, formAdd) ;
+    hideInputError(nameInputAdd, formAdd) ;
+    hideInputError(linkInput, formAdd) ;
 }
 
 function closePopup(evt) {
@@ -86,7 +86,7 @@ function handleSubmitForm(evt) {
 
 function renderCard(evt) {
   evt.preventDefault();
-  elements.prepend(createCard(formAdd.name.value, formAdd.link.value));
+  elements.prepend(createCard(formAdd.nameAdd.value, formAdd.link.value));
   closePopup(evt);
 }
 
@@ -97,67 +97,6 @@ function changeHeart(heart) {
 function deleteCard(evt){
   evt.target.closest(".element").remove();
 }
-
-function showInputError (input, errorMessage, form) {       
-  const error = form.querySelector(`#${input.name}-error`);
-  input.classList.remove('form__input');
-  input.classList.add('form__input-error');
-  error.textContent = errorMessage;
-  error.classList.add('form__massage-error');
-}
-function hideInputError (input, form) {
-  const error = form.querySelector(`#${input.name}-error`);
-  input.classList.remove('form__input-error');
-  input.classList.add('form__input');
-  error.textContent = '';
-  error.classList.remove('form__massage-error');
-}
-function isValidInput(input, form){                                   /*проверяем валидность input и выводим ошибку*/ 
-  if (!input.validity.valid ){
-    showInputError(input, input.validationMessage, form);
-  }
-  else {
-    hideInputError(input, form);
-  }
-}
-function isValidInputs(inputFirst, inputSecond, button){                /*проверяем валидность формы и блокируем кнопку*/ 
-  if (inputFirst.validity.valid && inputSecond.validity.valid) {
-    button.removeAttribute('disabled');
-    button.classList.remove('form__button_disabled');
-  }
-  else {
-    button.setAttribute('disabled', true);
-    button.classList.add('form__button_disabled');
-  }
-}
-
-
-nameInput.addEventListener('input', function(evt){            /*при изменении input появляется/исчезает ошибка под Input*/ 
-  evt.preventDefault();
-  isValidInput(nameInput, formEdit);
-})
-jobInput.addEventListener('input', function(evt){
-  evt.preventDefault();
-  isValidInput(jobInput, formEdit);
-})
-nameInputAdd.addEventListener('input', function(evt){
-  evt.preventDefault();
-  isValidInput(nameInputAdd, formAdd);
-})
-linkInput.addEventListener('input',function(evt){
-  evt.preventDefault();
-  isValidInput(linkInput, formAdd);
-})
-
-formEdit.addEventListener('input', function(evt){     /*при изменении input-ов блокируется/активируется кнопка*/ 
-  evt.preventDefault();
-  isValidInputs(nameInput, jobInput, buttonEdit);
-})
-formAdd.addEventListener('input', function(evt){
-  evt.preventDefault();
-  isValidInputs(nameInputAdd, linkInput, buttonAdd);
-})
-
 
 profileEditbutton.addEventListener("click", openPopupEdit);
 
