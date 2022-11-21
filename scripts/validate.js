@@ -20,21 +20,6 @@ function showInputError (input, errorMessage, form) {
       hideInputError(input, form);
     }
   }
-  function isValidInputs(formElement, button){                
-    const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', () => {
-        if (!inputElement.validity.valid) {
-          button.setAttribute('disabled', true);
-          button.classList.add('form__button_disabled');
-        }
-        else {
-          button.removeAttribute('disabled');
-          button.classList.remove('form__button_disabled');
-        }
-      })
-    })
-  }
   
   const setEventListeners = (formElement) => {
     const inputList = Array.from(formElement.querySelectorAll('.form__input'));
@@ -47,14 +32,23 @@ function showInputError (input, errorMessage, form) {
       });
     });
   };
-  const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.form'));
+
+  
+  function enableValidation(obj) {
+    const formList = Array.from(document.querySelectorAll(obj.formSelector));
     formList.forEach((formElement) => {
       setEventListeners(formElement);
     });
   };
   
-  enableValidation();
+  enableValidation( {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button',
+    inactiveButtonClass: '.form__button_disable',
+    inputErrorClass: '.form__input-correct',
+    errorClass: '/form__massage-error'
+  });
   
   
   const hasInvalidInput = (inputList) => {

@@ -22,6 +22,8 @@ const mestoButtonAdd = profile.querySelector(".profile__button");
 const popupImg = document.querySelector("#popup__galery");
 const elementButtons = elements.querySelectorAll(".element__image");
 
+const overlay = document.querySelector('.overlay');
+
 
 function createCard(name, link){
   const element = elementsContent.querySelector(".element").cloneNode(true);
@@ -113,5 +115,29 @@ elementButtons.forEach(function(item){
   item.addEventListener("click", openPopupImg)
 });
 
+const popupElement = Array.from(document.querySelectorAll('.popup'));
+function closePopupClickOverlay (evt){
+  if (evt.target === evt.currentTarget){
+    closePopup(evt);
+  }
+}
+popupElement.forEach(function(item){
+  item.addEventListener('click', closePopupClickOverlay);
+})
 
+function closePopupImgOverlay(evt){
+  const popupImgOpen = document.querySelector('.popup__opened');
+  if (popupImgOpen && evt.target === overlay){
+    popupImgOpen.classList.remove('popup__opened');
+  }
+}
+document.addEventListener('click', closePopupImgOverlay);
+
+function closePopupClickEsc(evt){
+  const popupOpen = document.querySelector('.popup__opened');
+  if ( popupOpen && evt.key ==='Escape'){
+    popupOpen.classList.remove("popup__opened");
+  }
+}
+document.addEventListener('keydown', closePopupClickEsc);
 
