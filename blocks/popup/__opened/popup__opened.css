@@ -1,7 +1,6 @@
 .popup__opened {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    visibility: visible;
-    opacity: 1;
+    visibility: visible; 
+    opacity: 1; 
 }
