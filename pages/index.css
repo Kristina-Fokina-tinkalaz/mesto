@@ -17,15 +17,14 @@
 @import url(../blocks/profile/__discription/profile__discription.css);
 @import url(../blocks/profile/__button/profile__button.css);
 
-@import url(../blocks/elements/elements.css);
-@import url(../blocks/element/element.css);
-@import url(../blocks/element/__image/element__image.css);
-@import url(../blocks/element/__description/element__description.css);
-@import url(../blocks/element/__text/element__text.css);
-@import url(../blocks/element/__heart/element__heart.css);
-@import url(../blocks/element/__heart/_change/element__heart_change.css);
-@import url(../blocks/element/__trash/element__trash.css);
-
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__description/card__description.css);
+@import url(../blocks/card/__text/card__text.css);
+@import url(../blocks/card/__heart/card__heart.css);
+@import url(../blocks/card/__heart/_change/card__heart_change.css);
+@import url(../blocks/card/__trash/card__trash.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
@@ -49,4 +48,3 @@
 @import url(../blocks/form/__title/form__title.css);
 
 @import url(../blocks/close-icon/close-icon.css);
-
