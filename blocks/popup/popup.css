@@ -7,6 +7,6 @@
     left: 0;
     visibility: hidden;
     opacity: 0;
-    transition: visibility .7s , opacity .7s linear;
+    transition: visibility .5s , opacity .5s linear;
     display: flex;
 }
