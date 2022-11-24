@@ -1,15 +1,15 @@
-.form__massage-error{
-    color: #FF0000;
-    position: absolute;
-    font-weight: 400;
-    font-size: 12px;
-    top:35px;
-    left: 36px;
-    line-height: 15px;
-    display: block;
+.form__massage-error {
+  color: #ff0000;
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  top: 35px;
+  left: 36px;
+  line-height: 15px;
+  display: block;
 }
 @media screen and (max-width: 768px) {
-    .form__massage-error{
-        left: 22px;
-    }
+  .form__massage-error {
+    left: 22px;
+  }
 }

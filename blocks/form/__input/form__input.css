@@ -1,21 +1,21 @@
 .form__input {
-    width: -webkit-fill-available;
-    margin: 0 36px 30px 36px;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    padding-bottom: 13px;
+  width: -webkit-fill-available;
+  margin: 0 36px 30px 36px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  padding-bottom: 13px;
 }
 
 .form__input:focus {
-    outline: 0;
+  outline: 0;
 }
-@media screen and (max-width:768px) {
-    .form__input {
-        margin: 0 22px 30px 22px;
-    }
+@media screen and (max-width: 768px) {
+  .form__input {
+    margin: 0 22px 30px 22px;
+  }
 }

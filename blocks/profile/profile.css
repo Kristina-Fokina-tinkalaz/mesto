@@ -1,12 +1,12 @@
 .profile {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
 }
 
-@media screen and (max-width:768px) {
-    .profile {
-        display: block;
-    }
+@media screen and (max-width: 768px) {
+  .profile {
+    display: block;
+  }
 }
