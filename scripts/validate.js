@@ -1,16 +1,24 @@
+const formData = {
+  formSelector: "form",
+  input: "form__input",
+  inputError: "form__input-error",
+  massageError: "massage-error",
+  buttonDisabled: "form__button_disabled",
+};
+
 function showInputError(input, errorMessage, form) {
   const error = form.querySelector(`#${input.name}-error`);
-  input.classList.remove("form__input");
-  input.classList.add("form__input-error");
+  input.classList.remove(formData.input);
+  input.classList.add(formData.inputError);
   error.textContent = errorMessage;
-  error.classList.add("form__massage-error");
+  error.classList.add(formData.massageError);
 }
 function hideInputError(input, form) {
   const error = form.querySelector(`#${input.name}-error`);
-  input.classList.remove("form__input-error");
-  input.classList.add("form__input");
+  input.classList.remove(formData.inputError);
+  input.classList.add(formData.input);
   error.textContent = "";
-  error.classList.remove("form__massage-error");
+  error.classList.remove(formData.massageError);
 }
 function isValid(input, form) {
   if (!input.validity.valid) {
@@ -32,21 +40,14 @@ const setEventListeners = (formElement) => {
   });
 };
 
-function enableValidation(obj) {
-  const formList = Array.from(document.querySelectorAll(obj.formSelector));
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll(formData.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement);
   });
 }
 
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
-  inactiveButtonClass: ".form__button_disable",
-  inputErrorClass: ".form__input-correct",
-  errorClass: "/form__massage-error",
-});
+enableValidation();
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -57,9 +58,9 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute("disabled", true);
-    buttonElement.classList.add("form__button_disabled");
+    buttonElement.classList.add(formData.buttonDisabled);
   } else {
     buttonElement.removeAttribute("disabled");
-    buttonElement.classList.remove("form__button_disabled");
+    buttonElement.classList.remove(formData.buttonDisabled);
   }
 };
