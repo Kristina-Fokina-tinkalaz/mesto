@@ -63,19 +63,22 @@ function openPopup(popup) {
     closePopup(popup);
   });
 }
-
+function hideFormErrors(form) {
+  const inputs = form.querySelectorAll(".form__input");
+  inputs.forEach(function (item) {
+    hideInputError(item, form);
+  });
+}
 function openPopupEdit() {
   openPopup(popupEdit);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
-  hideInputError(nameInput, formEdit);
-  hideInputError(jobInput, formEdit);
+  hideFormErrors(formEdit);
 }
 function openPopupAdd() {
   openPopup(popupAdd);
   formAdd.reset();
-  hideInputError(nameInputAdd, formAdd);
-  hideInputError(linkInput, formAdd);
+  hideFormErrors(formAdd);
   buttonAdd.setAttribute("disabled", true);
   buttonAdd.classList.add("form__button_disabled");
 }
