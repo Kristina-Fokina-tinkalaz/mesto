@@ -28,9 +28,13 @@ function checkInputValidity(input, form) {
   }
 }
 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
-  const buttonElement = formElement.querySelector(".form__button");
+const setEventListeners = (formElement, validationData) => {
+  const inputList = Array.from(
+    formElement.querySelectorAll(validationData.inputSelector)
+  );
+  const buttonElement = formElement.querySelector(
+    validationData.submitButtonSelector
+  );
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
@@ -40,16 +44,24 @@ const setEventListeners = (formElement) => {
   });
 };
 
-function enableValidation() {
+function enableValidation(validationData) {
   const formList = Array.from(
-    document.querySelectorAll(formClasses.formSelector)
+    document.querySelectorAll(validationData.formSelector)
   );
   formList.forEach((formElement) => {
-    setEventListeners(formElement);
+    setEventListeners(formElement, validationData);
   });
 }
 
-enableValidation();
+enableValidation({
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: ".form__button_disabled",
+  inputErrorClass: ".form__input-error",
+  errorMessageCorrect: ".form__massage-correct",
+  errorMessage: ".form__massage-error",
+});
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -59,7 +71,7 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.attr = "disabled";
+    buttonElement.disabled = true;
     buttonElement.classList.add(formClasses.buttonDisabled);
   } else {
     buttonElement.removeAttribute("disabled");
