@@ -1,30 +1,22 @@
-const formClasses = {
-  formSelector: "form",
-  input: "form__input",
-  inputError: "form__input-error",
-  massageError: "form__massage-error",
-  buttonDisabled: "form__button_disabled",
-};
-
-function showInputError(input, errorMessage, form) {
+function showInputError(input, errorMessage, form, validationData) {
   const error = form.querySelector(`#${input.name}-error`);
-  input.classList.remove(formClasses.input);
-  input.classList.add(formClasses.inputError);
+  input.classList.remove(validationData.inputClass);
+  input.classList.add(validationData.inputErrorClass);
   error.textContent = errorMessage;
-  error.classList.add(formClasses.massageError);
+  error.classList.add(validationData.errorMessageClass);
 }
-function hideInputError(input, form) {
+function hideInputError(input, form, validationData) {
   const error = form.querySelector(`#${input.name}-error`);
-  input.classList.remove(formClasses.inputError);
-  input.classList.add(formClasses.input);
+  input.classList.remove(validationData.inputErrorClass);
+  input.classList.add(validationData.inputClass);
   error.textContent = "";
-  error.classList.remove(formClasses.massageError);
+  error.classList.remove(validationData.errorMessageClass);
 }
-function checkInputValidity(input, form) {
+function checkInputValidity(input, form, validationData) {
   if (!input.validity.valid) {
-    showInputError(input, input.validationMessage, form);
+    showInputError(input, input.validationMessage, form, validationData);
   } else {
-    hideInputError(input, form);
+    hideInputError(input, form, validationData);
   }
 }
 
@@ -38,8 +30,8 @@ const setEventListeners = (formElement, validationData) => {
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      checkInputValidity(inputElement, formElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(inputElement, formElement, validationData);
+      toggleButtonState(inputList, buttonElement, validationData);
     });
   });
 };
@@ -52,16 +44,16 @@ function enableValidation(validationData) {
     setEventListeners(formElement, validationData);
   });
 }
-
-enableValidation({
+const validationData = {
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__button",
-  inactiveButtonClass: ".form__button_disabled",
-  inputErrorClass: ".form__input-error",
-  errorMessageCorrect: ".form__massage-correct",
-  errorMessage: ".form__massage-error",
-});
+  inputClass: "form__input",
+  inputErrorClass: "form__input-error",
+  inactiveButtonClass: "form__button_disabled",
+  errorMessageClass: "form__massage-error",
+};
+enableValidation(validationData);
 
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -69,12 +61,12 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, validationData) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
-    buttonElement.classList.add(formClasses.buttonDisabled);
+    buttonElement.classList.add(validationData.inactiveButtonClass);
   } else {
     buttonElement.removeAttribute("disabled");
-    buttonElement.classList.remove(formClasses.buttonDisabled);
+    buttonElement.classList.remove(validationData.inactiveButtonClass);
   }
 };
