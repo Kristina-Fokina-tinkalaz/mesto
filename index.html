@@ -12,33 +12,39 @@
       <header class="header">
         <img class="header__logo" src="images/Vector.png" alt="Место России" />
       </header>
-      <main class="main">
-        <div class="profile">
-          <img class="profile__avatar" src="images/avatar.jpg" alt="Аватарка" />
-          <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__editbutton"></button>
-            <p class="profile__description">Исследователь океана</p>
-          </div>
-          <button type="button" class="profile__button"></button>
-        </div>
-        <div>
-          <template class="cards">
-            <div class="card">
-              <img class="card__image" />
-              <div class="card__description">
-                <h2 class="card__text"></h2>
-                <button type="button" class="card__heart"></button>
-              </div>
-              <img class="card__trash" src="images/trash.png" alt="trash" />
+      <content>
+        <main class="main">
+          <div class="profile">
+            <img
+              class="profile__avatar"
+              src="images/avatar.jpg"
+              alt="Аватарка"
+            />
+            <div class="profile__info">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__editbutton"></button>
+              <p class="profile__description">Исследователь океана</p>
             </div>
-          </template>
-        </div>
-      </main>
+            <button type="button" class="profile__button"></button>
+          </div>
+          <div>
+            <template class="cards">
+              <div class="card">
+                <img class="card__image" />
+                <div class="card__description">
+                  <h2 class="card__text"></h2>
+                  <button type="button" class="card__heart"></button>
+                </div>
+                <img class="card__trash" src="images/trash.png" alt="trash" />
+              </div>
+            </template>
+          </div>
+        </main>
+      </content>
       <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
       </footer>
-      <div class="popup" id="popup__edit">
+      <div class="popup overlay-light" id="popup__edit">
         <form
           name="form"
           method="get"
@@ -78,7 +84,7 @@
           <button type="reset" class="close-icon"></button>
         </form>
       </div>
-      <div class="popup" id="popup__add">
+      <div class="popup overlay-light" id="popup__add">
         <form
           name="addCart"
           method="get"
@@ -123,7 +129,7 @@
           <button type="reset" class="close-icon"></button>
         </form>
       </div>
-      <div class="popup overlay" id="popup__galery">
+      <div class="popup overlay-dark" id="popup__galery">
         <div class="popup__galery">
           <img class="popup__img" />
           <h2 class="popup__text"></h2>

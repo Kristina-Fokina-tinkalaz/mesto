@@ -19,7 +19,6 @@ const popupImg = document.querySelector("#popup__galery");
 const imgGallery = document.querySelector(".popup__img");
 const imagePopupCaption = document.querySelector(".popup__text");
 
-const overlay = document.querySelector(".overlay");
 const iconsClose = document.querySelectorAll(".close-icon");
 
 function createCard(cardData) {

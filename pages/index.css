@@ -29,7 +29,8 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__text/footer__text.css);
 
-@import url(../blocks/overlay/overlay.css);
+@import url(../blocks/overlay-light/overlay-light.css);
+@import url(../blocks/overlay-dark/overlay-dark.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__opened/popup__opened.css);
