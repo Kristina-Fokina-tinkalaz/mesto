@@ -12,36 +12,12 @@ const jobInput = formEdit.elements.description;
 const formAdd = document.forms.addCart;
 const buttonAdd = formAdd.elements.button;
 
-const cardTemplateElement = document.querySelector(".cards");
-const cardTemplateContent = cardTemplateElement.content.querySelector(".card");
 const mestoButtonAdd = profile.querySelector(".profile__button");
 const popupImg = document.querySelector("#popup__galery");
 const imgGallery = document.querySelector(".popup__img");
 const imagePopupCaption = document.querySelector(".popup__text");
 
 const iconsClose = document.querySelectorAll(".close-icon");
-
-function createCard(cardData) {
-  const cardClone = cardTemplateContent.cloneNode(true);
-  const heart = cardClone.querySelector(".card__heart");
-  const buttonsTrash = cardClone.querySelector(".card__trash");
-  const cardImage = cardClone.querySelector(".card__image");
-
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardClone.querySelector(".card__text").textContent = cardData.name;
-
-  heart.addEventListener("click", changeHeart);
-  buttonsTrash.addEventListener("click", deleteCard);
-  cardImage.addEventListener("click", openPopupImg);
-  return cardClone;
-}
-
-initialCards.forEach(function (item) {
-  const cardData = { name: item.name, link: item.link };
-  const cardReturn = createCard(cardData);
-  cardTemplateElement.append(cardReturn);
-});
 
 const closePopupClickEsc = (evt) => {
   const popupOpen = document.querySelector(".popup__opened");
@@ -88,13 +64,6 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closePopupClickEsc);
 }
 
-function openPopupImg(evt) {
-  openPopup(popupImg);
-  imgGallery.src = evt.target.src;
-  imgGallery.alt = evt.target.alt;
-  imagePopupCaption.textContent = evt.target.alt;
-}
-
 function handleSubmitEditForm(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
@@ -108,14 +77,6 @@ function handleCardFormSubmit(evt) {
   cardTemplateElement.prepend(createCard(cardData));
   const popupOpen = document.querySelector(".popup__opened");
   closePopup(popupOpen);
-}
-
-function changeHeart(evt) {
-  evt.target.classList.toggle("card__heart_change");
-}
-
-function deleteCard(evt) {
-  evt.target.closest(".card").remove();
 }
 
 profileEditButton.addEventListener("click", function () {
