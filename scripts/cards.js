@@ -1,30 +1,6 @@
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-class card {
+import { openPopup } from "./index.js";
+
+export class card {
   constructor(image, title, templateSelector) {
     this._image = image;
     this._title = title;
@@ -37,11 +13,15 @@ class card {
     evt.target.closest(".card").remove();
   }
   _openPopupImg(evt) {
+    const popupImg = document.querySelector("#popup__galery");
+    const imgGallery = document.querySelector(".popup__img");
+    const imagePopupCaption = document.querySelector(".popup__text");
     openPopup(popupImg);
     imgGallery.src = evt.target.src;
     imgGallery.alt = evt.target.alt;
     imagePopupCaption.textContent = evt.target.alt;
   }
+
   createCard() {
     const cardClone = document
       .querySelector(this._templateSelector)
@@ -61,9 +41,3 @@ class card {
     return cardClone;
   }
 }
-initialCards.forEach(function (item) {
-  const cardTemplateElement = document.querySelector(".cards");
-  const newCard = new card(item.link, item.name, ".cards");
-  const cardReturn = newCard.createCard();
-  cardTemplateElement.append(cardReturn);
-});
