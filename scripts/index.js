@@ -1,6 +1,7 @@
-import { card } from "./cards.js";
-import { formValidator } from "./FormValidator.js";
-export { openPopup };
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import { initialCards } from "./initialCards.js";
+export { openPopup, popupImg, imgGallery, imagePopupCaption };
 
 const validationData = {
   formSelector: ".form",
@@ -25,42 +26,18 @@ const nameInput = formEdit.elements.name;
 const jobInput = formEdit.elements.description;
 
 const formAdd = document.forms.addCart;
-const buttonAdd = formAdd.elements.button;
 
+const popupOpen = document.querySelector(".popup__opened");
 const mestoButtonAdd = profile.querySelector(".profile__button");
 const popupCards = Array.from(document.querySelectorAll(".popup"));
 const iconsClose = document.querySelectorAll(".close-icon");
 const cardTemplateElement = document.querySelector(".cards");
+const popupImg = document.querySelector("#popup__galery");
+const imgGallery = document.querySelector(".popup__img");
+const imagePopupCaption = document.querySelector(".popup__text");
 
-const newValidFormAdd = new formValidator(validationData, formAdd);
-const newValidFormEdit = new formValidator(validationData, formEdit);
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+const newValidFormAdd = new FormValidator(validationData, formAdd);
+const newValidFormEdit = new FormValidator(validationData, formEdit);
 
 function openPopup(popup) {
   popup.classList.add("popup__opened");
@@ -76,8 +53,7 @@ function openPopupEdit() {
 function openPopupAdd() {
   openPopup(popupAdd);
   formAdd.reset();
-  buttonAdd.setAttribute("disabled", true);
-  buttonAdd.classList.add("form__button_disabled");
+  newValidFormAdd.disablButton();
   newValidFormAdd.hideFormErrors();
 }
 function closePopup(popup) {
@@ -90,18 +66,24 @@ function handleSubmitEditForm(evt) {
   profileDescription.textContent = jobInput.value;
   closePopup(popupEdit);
 }
+
+function generateNewCard(form_link, form_name) {
+  const newCard = new Card(form_link, form_name, ".cards");
+  const cardReturn = newCard.createCard();
+  return cardReturn;
+}
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  const cardData = new card(
-    formAdd.link.value,
-    formAdd.nameAdd.value,
-    ".cards"
-  );
-  const cardReturn = cardData.createCard();
+  const cardReturn = generateNewCard(formAdd.link.value, formAdd.nameAdd.value);
   cardTemplateElement.prepend(cardReturn);
-  const popupOpen = document.querySelector(".popup__opened");
+  const popupOpen = document.querySelector(".popup__opened"); //если вынести за функцию, он не видит эту константу
   closePopup(popupOpen);
 }
+initialCards.forEach(function (item) {
+  const cardReturn = generateNewCard(item.link, item.name);
+  cardTemplateElement.append(cardReturn);
+});
+
 profileEditButton.addEventListener("click", function () {
   openPopupEdit();
 });
@@ -120,14 +102,14 @@ popupCards.forEach(function (item) {
   item.addEventListener("click", closePopupClickOverlay);
 });
 const closePopupClickEsc = (evt) => {
-  const popupOpen = document.querySelector(".popup__opened");
-  if (popupOpen && evt.key === "Escape") {
+  if (evt.key === "Escape") {
+    const popupOpen = document.querySelector(".popup__opened"); //если вынести за функцию, он не видит эту константу
     closePopup(popupOpen);
   }
 };
 iconsClose.forEach(function (item) {
   item.addEventListener("click", () => {
-    const popupOpen = document.querySelector(".popup__opened");
+    const popupOpen = document.querySelector(".popup__opened"); //если вынести за функцию, он не видит эту константу
     closePopup(popupOpen);
   });
 });
@@ -135,9 +117,3 @@ iconsClose.forEach(function (item) {
 newValidFormAdd.enableValidation();
 
 newValidFormEdit.enableValidation();
-
-initialCards.forEach(function (item) {
-  const newCard = new card(item.link, item.name, ".cards");
-  const cardReturn = newCard.createCard();
-  cardTemplateElement.append(cardReturn);
-});
