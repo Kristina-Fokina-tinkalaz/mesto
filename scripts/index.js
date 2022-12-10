@@ -76,8 +76,7 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const cardReturn = generateNewCard(formAdd.link.value, formAdd.nameAdd.value);
   cardTemplateElement.prepend(cardReturn);
-  const popupOpen = document.querySelector(".popup__opened"); //если вынести за функцию, он не видит эту константу
-  closePopup(popupOpen);
+  closePopup(popupAdd);
 }
 initialCards.forEach(function (item) {
   const cardReturn = generateNewCard(item.link, item.name);
@@ -95,6 +94,7 @@ mestoButtonAdd.addEventListener("click", function () {
 
 function closePopupClickOverlay(evt) {
   if (evt.target === evt.currentTarget) {
+    console.log(evt.target);
     closePopup(evt.target);
   }
 }
@@ -103,14 +103,13 @@ popupCards.forEach(function (item) {
 });
 const closePopupClickEsc = (evt) => {
   if (evt.key === "Escape") {
-    const popupOpen = document.querySelector(".popup__opened"); //если вынести за функцию, он не видит эту константу
+    const popupOpen = document.querySelector(".popup__opened");
     closePopup(popupOpen);
   }
 };
 iconsClose.forEach(function (item) {
-  item.addEventListener("click", () => {
-    const popupOpen = document.querySelector(".popup__opened"); //если вынести за функцию, он не видит эту константу
-    closePopup(popupOpen);
+  item.addEventListener("click", (evt) => {
+    closePopup(evt.target.parentElement.parentElement);
   });
 });
 

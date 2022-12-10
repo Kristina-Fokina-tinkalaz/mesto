@@ -17,6 +17,7 @@ export class Card {
   }
   _deleteCard(evt) {
     evt.target.closest(this._cardSelector).remove();
+    this._element = null;
   }
   _openPopupImg() {
     imgGallery.src = this._image;
@@ -31,7 +32,6 @@ export class Card {
       .cloneNode(true);
   }
   _setEventListeners() {
-    const cardImage = this._element.querySelector(this._cardImageSelector);
     const heart = this._element.querySelector(this._cardHeartSelector);
     const buttonsTrash = this._element.querySelector(this._cardTrashSelector);
 
@@ -41,16 +41,15 @@ export class Card {
     buttonsTrash.addEventListener("click", (evt) => {
       this._deleteCard(evt);
     });
-    cardImage.addEventListener("click", () => {
+    this._cardImage.addEventListener("click", () => {
       this._openPopupImg();
     });
   }
   createCard() {
     this._element = this._getTemplate();
-    const cardImage = this._element.querySelector(this._cardImageSelector);
-
-    cardImage.src = this._image;
-    cardImage.alt = this._title;
+    this._cardImage = this._element.querySelector(this._cardImageSelector);
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._title;
     this._element.querySelector(this._cardTextSelector).textContent =
       this._title;
 
