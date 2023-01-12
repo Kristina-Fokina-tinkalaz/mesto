@@ -1,6 +1,7 @@
-import { openPopup, popupImg, imgGallery, imagePopupCaption } from "./index.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+export { Card };
 
-export class Card {
+class Card {
   constructor(image, title, templateSelector) {
     this._image = image;
     this._title = title;
@@ -19,12 +20,12 @@ export class Card {
     evt.target.closest(this._cardSelector).remove();
     this._element = null;
   }
-  _openPopupImg() {
-    imgGallery.src = this._image;
-    imgGallery.alt = this._title;
-    imagePopupCaption.textContent = this._title;
-    openPopup(popupImg);
-  }
+  // _openPopupImg() {
+  //   imgGallery.src = this._image;
+  //   imgGallery.alt = this._title;
+  //   imagePopupCaption.textContent = this._title;
+  //   openNewPopup(popupImg);
+  // }
   _getTemplate() {
     return document
       .querySelector(this._templateSelector)
@@ -42,7 +43,13 @@ export class Card {
       this._deleteCard(evt);
     });
     this._cardImage.addEventListener("click", () => {
-      this._openPopupImg();
+      const newPopupWithImage = new PopupWithImage(
+        this._cardImage,
+        this._image,
+        this._title
+      );
+      newPopupWithImage.open();
+      // this._openPopupImg();
     });
   }
   createCard() {
