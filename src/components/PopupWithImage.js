@@ -1,5 +1,5 @@
 import { Popup } from "./Popup.js";
-import { openNewPopup } from "../pages/index.js";
+import { openNewPopup } from "../index.js";
 import { imgGallery, imagePopupCaption, popupImg } from "../utils/constants.js";
 export { PopupWithImage };
 

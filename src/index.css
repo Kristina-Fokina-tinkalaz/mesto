@@ -1,0 +1,51 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/inter.css);
+
+@import url(./blocks/body/body.css);
+@import url(./blocks/page/page.css);
+
+@import url(./blocks/header/header.css);
+@import url(./blocks/header/__logo/header__logo.css);
+
+@import url(./blocks/main/main.css);
+
+@import url(./blocks/profile/profile.css);
+@import url(./blocks/profile/__avatar/profile__avatar.css);
+@import url(./blocks/profile/__info/profile__info.css);
+@import url(./blocks/profile/__name/profile__name.css);
+@import url(./blocks/profile/__editbutton/profile__editbutton.css);
+@import url(./blocks/profile/__description/profile__description.css);
+@import url(./blocks/profile/__button/profile__button.css);
+
+@import url(./blocks/cards/cards.css);
+@import url(./blocks/card/card.css);
+@import url(./blocks/card/__image/card__image.css);
+@import url(./blocks/card/__description/card__description.css);
+@import url(./blocks/card/__text/card__text.css);
+@import url(./blocks/card/__heart/card__heart.css);
+@import url(./blocks/card/__heart/_change/card__heart_change.css);
+@import url(./blocks/card/__trash/card__trash.css);
+
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/footer/__text/footer__text.css);
+
+@import url(./blocks/overlay-light/overlay-light.css);
+@import url(./blocks/overlay-dark/overlay-dark.css);
+
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/popup/__opened/popup__opened.css);
+@import url(./blocks/popup/__galery/popup__galery.css);
+@import url(./blocks/popup/__img/popup__img.css);
+@import url(./blocks/popup/__text/popup__text.css);
+
+@import url(./blocks/form/form.css);
+@import url(./blocks/form/__button/form__button.css);
+@import url(./blocks/form/__button/_disabled/form__button_disabled.css);
+@import url(./blocks/form/__container/form__container.css);
+@import url(./blocks/form/__input-error/form__input-error.css);
+@import url(./blocks/form/__input/form__input.css);
+@import url(./blocks/form/__massage-correct/form__massage-correct.css);
+@import url(./blocks/form/__massage-error/form__massage-error.css);
+@import url(./blocks/form/__title/form__title.css);
+
+@import url(./blocks/close-icon/close-icon.css);

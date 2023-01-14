@@ -1,8 +1,7 @@
-import { PopupWithImage } from "./PopupWithImage.js";
 export { Card };
 
 class Card {
-  constructor(image, title, templateSelector) {
+  constructor(image, title, templateSelector, handleCardClick) {
     this._image = image;
     this._title = title;
     this._templateSelector = templateSelector;
@@ -12,6 +11,7 @@ class Card {
     this._cardHeartSelector = ".card__heart";
     this._cardTrashSelector = ".card__trash";
     this._cardTextSelector = ".card__text";
+    this._handleCardClick = handleCardClick;
   }
   _changeHeart(evt) {
     evt.target.classList.toggle(this._cardHeartChangeClass);
@@ -20,12 +20,7 @@ class Card {
     evt.target.closest(this._cardSelector).remove();
     this._element = null;
   }
-  // _openPopupImg() {
-  //   imgGallery.src = this._image;
-  //   imgGallery.alt = this._title;
-  //   imagePopupCaption.textContent = this._title;
-  //   openNewPopup(popupImg);
-  // }
+
   _getTemplate() {
     return document
       .querySelector(this._templateSelector)
@@ -43,13 +38,7 @@ class Card {
       this._deleteCard(evt);
     });
     this._cardImage.addEventListener("click", () => {
-      const newPopupWithImage = new PopupWithImage(
-        this._cardImage,
-        this._image,
-        this._title
-      );
-      newPopupWithImage.open();
-      // this._openPopupImg();
+      this._handleCardClick();
     });
   }
   createCard() {
