@@ -4,6 +4,7 @@ class Popup {
   constructor(popup) {
     this._popup = popup;
     this._iconClose = popup.querySelector(".close-icon");
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
@@ -18,12 +19,12 @@ class Popup {
 
   open() {
     this._popup.classList.add("popup__opened");
-    document.addEventListener("keydown", this._handleEscClose.bind(this));
+    document.addEventListener("keydown", this._handleEscClose);
   }
 
   close() {
     this._popup.classList.remove("popup__opened");
-    document.removeEventListener("keydown", this._handleEscClose.bind(this));
+    document.removeEventListener("keydown", this._handleEscClose);
   }
 
   setEventListeners() {

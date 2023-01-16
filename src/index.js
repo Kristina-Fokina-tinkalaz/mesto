@@ -67,10 +67,19 @@ profileEditButton.addEventListener("click", () => {
   newValidFormEdit.disablButton();
 });
 
+const newSection = new Section(
+  {
+    items: { link: linkAddImg.value, name: nameAddImg.value },
+    renderer: () => {
+      newSection.renderItems();
+    },
+  },
+  cardTemplateElement
+);
+
 const newPopupWithAddForm = new PopupWithForm(popupAdd, ({ nameAdd, link }) => {
-  console.log({ nameAdd });
-  const cartReturn = generateNewCard(link, nameAdd);
-  cardTemplateElement.prepend(cartReturn);
+  const cardReturn = generateNewCard(link, nameAdd);
+  newSection.addItem(cardReturn);
 });
 
 mestoButtonAdd.addEventListener("click", () => {

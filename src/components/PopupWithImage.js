@@ -9,10 +9,9 @@ class PopupWithImage extends Popup {
   }
 
   open(title, image) {
-    super.open();
-    console.log(this._popup);
     this._imgGallery.src = image;
     this._imgGallery.alt = title;
     this._imagePopupCaption.textContent = title;
+    super.open();
   }
 }
