@@ -7,6 +7,7 @@ class Card {
     this._templateSelector = templateSelector;
     this._cardHeartChangeClass = "card__heart_change";
     this._cardSelector = ".card";
+    this._cardsSelector = ".cards";
     this._cardImageSelector = ".card__image";
     this._cardHeartSelector = ".card__heart";
     this._cardTrashSelector = ".card__trash";
@@ -16,9 +17,9 @@ class Card {
   _changeHeart(evt) {
     evt.target.classList.toggle(this._cardHeartChangeClass);
   }
-  _deleteCard(evt) {
-    evt.target.closest(this._cardSelector).remove();
-    this._element = null;
+  _deleteCard() {
+    this._element.remove();
+    // this._element = null;
   }
 
   _getTemplate() {
@@ -34,8 +35,8 @@ class Card {
     heart.addEventListener("click", (evt) => {
       this._changeHeart(evt);
     });
-    buttonsTrash.addEventListener("click", (evt) => {
-      this._deleteCard(evt);
+    buttonsTrash.addEventListener("click", () => {
+      this._deleteCard();
     });
     this._cardImage.addEventListener("click", () => {
       this._handleCardClick();

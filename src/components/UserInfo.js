@@ -1,13 +1,16 @@
 export { UserInfo };
 
 class UserInfo {
-  constructor(data) {
-    this._data = data;
-    this._name = data.name;
-    this._info = data.info;
+  constructor({ name, info }) {
+    this._name = name;
+    this._info = info;
   }
 
   getUserInfo() {
+    this._data = {
+      name: this._name.textContent,
+      info: this._info.textContent,
+    };
     return this._data;
   }
 

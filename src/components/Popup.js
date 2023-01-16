@@ -1,9 +1,9 @@
 export { Popup };
-import { iconsClose, popupCards } from "../utils/constants.js";
 
 class Popup {
-  constructor(SelectorPopup) {
-    this._selectorPopup = SelectorPopup;
+  constructor(popup) {
+    this._popup = popup;
+    this._iconClose = popup.querySelector(".close-icon");
   }
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
@@ -17,29 +17,20 @@ class Popup {
   }
 
   open() {
-    this._selectorPopup.classList.add("popup__opened");
-    document.addEventListener("keydown", (evt) => {
-      this._handleEscClose(evt);
-    });
+    this._popup.classList.add("popup__opened");
+    document.addEventListener("keydown", this._handleEscClose.bind(this));
   }
 
   close() {
-    this._selectorPopup.classList.remove("popup__opened");
-    document.removeEventListener("keydown", (evt) => {
-      this._handleEscClose(evt);
-    });
+    this._popup.classList.remove("popup__opened");
+    document.removeEventListener("keydown", this._handleEscClose.bind(this));
   }
 
   setEventListeners() {
-    iconsClose.forEach((item) => {
-      item.addEventListener("click", () => {
-        this.close();
-      });
-    });
-    popupCards.forEach((item) => {
-      item.addEventListener("click", (evt) => {
-        this._closePopupClickOverlay(evt);
-      });
-    });
+    this._iconClose.addEventListener("click", this.close.bind(this));
+    this._popup.addEventListener(
+      "click",
+      this._closePopupClickOverlay.bind(this)
+    );
   }
 }

@@ -18,6 +18,8 @@ export {
   popupImg,
   imgGallery,
   imagePopupCaption,
+  nameAddImg,
+  linkAddImg,
 };
 const validationData = {
   formSelector: ".form",
@@ -42,6 +44,8 @@ const nameInput = formEdit.elements.name;
 const jobInput = formEdit.elements.description;
 
 const formAdd = document.forms.addCart;
+const nameAddImg = formAdd.elements.nameAdd;
+const linkAddImg = formAdd.elements.link;
 
 const popupOpen = document.querySelector(".popup__opened");
 const mestoButtonAdd = profile.querySelector(".profile__button");

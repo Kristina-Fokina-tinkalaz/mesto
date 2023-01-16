@@ -51,8 +51,7 @@ export class FormValidator {
     }
   }
   hideFormErrors() {
-    const inputs = this._form.querySelectorAll(this._formInputErrorSelector);
-    inputs.forEach((item) => {
+    this._inputList.forEach((item) => {
       this._hideInputError(item);
     });
   }

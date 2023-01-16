@@ -16,29 +16,24 @@ import {
   formEdit,
   profileEditButton,
   mestoButtonAdd,
+  popupImg,
+  nameAddImg,
+  linkAddImg,
 } from "./utils/constants.js";
-import { Popup } from "./components/Popup.js";
+
 import { UserInfo } from "./components/UserInfo.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
-export {
-  openNewPopup,
-  newValidFormAdd,
-  newValidFormEdit,
-  closeNewPopup,
-  generateNewCard,
-};
+export { newValidFormAdd, newValidFormEdit, generateNewCard };
 
-function openNewPopup(popup) {
-  const newPopup = new Popup(popup);
-  newPopup.open();
-  newPopup.setEventListeners();
+const newPopupWithImage = new PopupWithImage(popupImg);
+function generateNewCard(form_link, form_name) {
+  const newCard = new Card(form_link, form_name, ".cards", () => {
+    newPopupWithImage.open(form_name, form_link);
+  });
+  const cardReturn = newCard.createCard();
+  return cardReturn;
 }
-function closeNewPopup(popup) {
-  const newPopup = new Popup(popup);
-  newPopup.close();
-}
-
 const newSections = new Section(
   {
     items: initialCards,
@@ -49,54 +44,44 @@ const newSections = new Section(
   },
   cardTemplateElement
 );
-
 newSections.renderItems();
 
 const newValidFormAdd = new FormValidator(validationData, formAdd);
 const newValidFormEdit = new FormValidator(validationData, formEdit);
-
-function generateNewCard(form_link, form_name) {
-  const newCard = new Card(form_link, form_name, ".cards", () => {
-    const cardImage = newCard.createCard().querySelector(".card__image");
-    const newPopupWithImage = new PopupWithImage(
-      cardImage,
-      form_link,
-      form_name
-    );
-    newPopupWithImage.open();
-  });
-  const cardReturn = newCard.createCard();
-  return cardReturn;
-}
 
 const newUserInfo = new UserInfo({
   name: profileName,
   info: profileDescription,
 });
 
-profileEditButton.addEventListener("click", () => {
-  openNewPopup(popupEdit);
-  nameInput.value = newUserInfo.getUserInfo().name.textContent;
-  jobInput.value = newUserInfo.getUserInfo().info.textContent;
-  newValidFormEdit.hideFormErrors();
+const newPopupWithEditForm = new PopupWithForm(popupEdit, ({ name, info }) => {
+  newUserInfo.setUserInfo({ name: nameInput.value, info: jobInput.value });
 });
-formEdit.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  newUserInfo.setUserInfo({
-    name: nameInput.value,
-    info: jobInput.value,
-  });
-  closeNewPopup(popupEdit);
+
+profileEditButton.addEventListener("click", () => {
+  const userData = newUserInfo.getUserInfo();
+  newPopupWithEditForm.open();
+  nameInput.value = userData.name;
+  jobInput.value = userData.info;
+  newValidFormEdit.hideFormErrors();
+  newValidFormEdit.disablButton();
+});
+
+const newPopupWithAddForm = new PopupWithForm(popupAdd, ({ nameAdd, link }) => {
+  console.log({ nameAdd });
+  const cartReturn = generateNewCard(link, nameAdd);
+  cardTemplateElement.prepend(cartReturn);
 });
 
 mestoButtonAdd.addEventListener("click", () => {
-  const NewPopupWithForm = new PopupWithForm(popupAdd, (cardReturn) => {
-    cardTemplateElement.prepend(cardReturn);
-  });
-  NewPopupWithForm.open();
-  NewPopupWithForm.setEventListeners();
+  newPopupWithAddForm.open();
+  formAdd.reset();
+  newValidFormAdd.disablButton();
+  newValidFormAdd.hideFormErrors();
 });
 
+newPopupWithEditForm.setEventListeners();
 newValidFormAdd.enableValidation();
-
 newValidFormEdit.enableValidation();
+newPopupWithAddForm.setEventListeners();
+newPopupWithImage.setEventListeners();
