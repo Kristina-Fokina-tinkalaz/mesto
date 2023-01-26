@@ -17,15 +17,11 @@
       </header>
       <main class="main">
         <div class="profile">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/avatar.jpg')%>"
-            alt="Аватарка"
-          />
+          <img class="profile__avatar" alt="Аватарка" />
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__editbutton"></button>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
           <button type="button" class="profile__button"></button>
         </div>
@@ -35,7 +31,10 @@
               <img class="card__image" />
               <div class="card__description">
                 <h2 class="card__text"></h2>
-                <button type="button" class="card__heart"></button>
+                <div class="card__number-heart">
+                  <button type="button" class="card__heart"></button>
+                  <div class="card__number">0</div>
+                </div>
               </div>
               <img
                 class="card__trash"
@@ -140,6 +139,19 @@
           <h2 class="popup__text"></h2>
           <button type="reset" class="close-icon"></button>
         </div>
+      </div>
+      <div class="popup overlay-light" id="popupRemove">
+        <form
+          name="formRemove"
+          method="get"
+          class="form"
+          action="index.html"
+          id="formRemove"
+        >
+          <h2 class="form__title">Вы уверены?</h2>
+          <button name="button" type="submit" class="form__button">Да</button>
+          <button type="reset" class="close-icon"></button>
+        </form>
       </div>
     </div>
   </body>

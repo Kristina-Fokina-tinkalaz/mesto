@@ -1,0 +1,6 @@
+.card__number-heart {
+  width: 22px;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+}

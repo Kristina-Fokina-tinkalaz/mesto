@@ -5,13 +5,11 @@
   border-radius: 10px;
   margin: auto;
   width: 430px;
-  height: 330px;
   position: relative;
 }
 
 @media screen and (max-width: 768px) {
   .form {
     width: 282px;
-    height: 322px;
   }
 }

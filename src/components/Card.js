@@ -1,9 +1,17 @@
 export { Card };
 
 class Card {
-  constructor(image, title, templateSelector, handleCardClick) {
+  constructor(
+    image,
+    title,
+    cardId,
+    templateSelector,
+    handleCardClick,
+    deleteCard
+  ) {
     this._image = image;
     this._title = title;
+    this._cardId = cardId;
     this._templateSelector = templateSelector;
     this._cardHeartChangeClass = "card__heart_change";
     this._cardSelector = ".card";
@@ -13,20 +21,19 @@ class Card {
     this._cardTrashSelector = ".card__trash";
     this._cardTextSelector = ".card__text";
     this._handleCardClick = handleCardClick;
+    this._deleteCard = deleteCard;
   }
   _changeHeart(evt) {
     evt.target.classList.toggle(this._cardHeartChangeClass);
   }
-  _deleteCard() {
-    this._element.remove();
-    // this._element = null;
-  }
-
   _getTemplate() {
     return document
       .querySelector(this._templateSelector)
       .content.querySelector(this._cardSelector)
       .cloneNode(true);
+  }
+  deleteCard() {
+    this._element.remove();
   }
   _setEventListeners() {
     const heart = this._element.querySelector(this._cardHeartSelector);
@@ -49,7 +56,7 @@ class Card {
     this._cardImage.alt = this._title;
     this._element.querySelector(this._cardTextSelector).textContent =
       this._title;
-
+    this._element.id = this._cardId;
     this._setEventListeners();
 
     return this._element;

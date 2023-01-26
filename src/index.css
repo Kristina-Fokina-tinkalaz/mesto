@@ -25,6 +25,8 @@
 @import url(./blocks/card/__heart/card__heart.css);
 @import url(./blocks/card/__heart/_change/card__heart_change.css);
 @import url(./blocks/card/__trash/card__trash.css);
+@import url(./blocks/card/__number/card__number.css);
+@import url(./blocks/card/__number-heart/card__number-heart.css);
 
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__text/footer__text.css);

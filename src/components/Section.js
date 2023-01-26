@@ -8,6 +8,8 @@ class Section {
 
   addItems(element) {
     this._container.append(element);
+    // const trash = element.querySelector(".card__trash");
+    // trash.remove();
   }
   addItem(element) {
     this._container.prepend(element);
