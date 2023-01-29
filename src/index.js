@@ -165,10 +165,10 @@ const newPopupWithEditForm = new PopupWithForm(popupEdit, ({ name, info }) => {
 
 const newPopupWithEditAvatar = new PopupWithForm(
   popupEditAvatarForm,
-  ({ link }) => {
+  ({ link_avatar }) => {
     newPopupWithEditAvatar.renderLoading(true);
     api
-      .changeAvatar(link)
+      .changeAvatar(link_avatar)
       .then((res) => {
         profileAvatar.src = res.avatar;
       })
