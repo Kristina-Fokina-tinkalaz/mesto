@@ -163,28 +163,35 @@
         </form>
       </div>
       <div class="popup overlay-light" id="popupEditAvatarForm">
-        <form name="editAvatarForm" class="form" method="get" id="EditAvatarForm" action="index.html" novalidate>
-              <h2 class="form__title">Обновить аватар</h2>
-              <div class="form__container">
-              <input
+        <form
+          name="editAvatarForm"
+          class="form"
+          method="get"
+          id="EditAvatarForm"
+          action="index.html"
+          novalidate
+        >
+          <h2 class="form__title">Обновить аватар</h2>
+          <div class="form__container">
+            <input
               class="form__input"
               type="url"
               name="link"
-              id="link"
               placeholder="Ссылка на картинку"
               required
-              /><span class="form__input-correct" id="link-error"></span>
-              </div>
-              <button
-              name="button"
-              type="submit"
-              class="form__button form__button_disabled"
-              disabled
-              >
-              Сохранить
-              </button>
-              <button type="reset" class="close-icon"></button>
+            /><span class="form__input-correct" id="link-error"></span>
+          </div>
+          <button
+            name="button"
+            type="submit"
+            class="form__button form__button_disabled"
+            disabled
+          >
+            Сохранить
+          </button>
+          <button type="reset" class="close-icon"></button>
         </form>
+      </div>
     </div>
   </body>
 </html>

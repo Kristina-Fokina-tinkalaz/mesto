@@ -83,7 +83,12 @@ function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
       }
     },
     () => {
-      if (arrayLikes.some((item) => (item._id = userId))) {
+      console.log(arrayLikes);
+      if (
+        arrayLikes.some((item) => {
+          item._id && item._id == userId;
+        })
+      ) {
         newCard.activeLike();
       } else {
         newCard.noLike();
@@ -210,7 +215,7 @@ const newPopupWithAddForm = new PopupWithForm(popupAdd, ({ nameAdd, link }) => {
         res.link,
         res.name,
         res._id,
-        res.owner._id, //res.owner._id
+        res.owner._id,
         res.likes
       );
 
