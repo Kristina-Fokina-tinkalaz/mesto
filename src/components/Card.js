@@ -5,9 +5,13 @@ class Card {
     image,
     title,
     cardId,
+    arrayLikes,
+    userId,
     templateSelector,
     handleCardClick,
-    deleteCard
+    deleteCard,
+    changeHeartApi,
+    getHeart
   ) {
     this._image = image;
     this._title = title;
@@ -22,9 +26,10 @@ class Card {
     this._cardTextSelector = ".card__text";
     this._handleCardClick = handleCardClick;
     this._deleteCard = deleteCard;
-  }
-  _changeHeart(evt) {
-    evt.target.classList.toggle(this._cardHeartChangeClass);
+    this._arrayLikes = arrayLikes;
+    this._userId = userId;
+    this._changeHeartApi = changeHeartApi;
+    this._getHeart = getHeart;
   }
   _getTemplate() {
     return document
@@ -32,6 +37,28 @@ class Card {
       .content.querySelector(this._cardSelector)
       .cloneNode(true);
   }
+
+  activeLike() {
+    const heart = this._element.querySelector(this._cardHeartSelector);
+    heart.classList.add(this._cardHeartChangeClass);
+  }
+  noLike() {
+    const heart = this._element.querySelector(this._cardHeartSelector);
+    heart.classList.remove(this._cardHeartChangeClass);
+  }
+
+  addLike(data) {
+    this._likes = this._element.querySelector(".card__number");
+    this._likes.textContent = data.likes.length;
+
+    this.activeLike();
+  }
+  deleteLike(data) {
+    this._likes = this._element.querySelector(".card__number");
+    this._likes.textContent = data.likes.length;
+    this.noLike();
+  }
+
   deleteCard() {
     this._element.remove();
   }
@@ -40,14 +67,10 @@ class Card {
     const buttonsTrash = this._element.querySelector(this._cardTrashSelector);
 
     heart.addEventListener("click", (evt) => {
-      this._changeHeart(evt);
+      this._changeHeartApi(evt);
     });
-    buttonsTrash.addEventListener("click", () => {
-      this._deleteCard();
-    });
-    this._cardImage.addEventListener("click", () => {
-      this._handleCardClick();
-    });
+    buttonsTrash.addEventListener("click", this._deleteCard);
+    this._cardImage.addEventListener("click", this._handleCardClick);
   }
   createCard() {
     this._element = this._getTemplate();
@@ -57,7 +80,11 @@ class Card {
     this._element.querySelector(this._cardTextSelector).textContent =
       this._title;
     this._element.id = this._cardId;
+    this._likes = this._element.querySelector(".card__number");
+    this._likes.textContent = this._arrayLikes.length;
+
     this._setEventListeners();
+    this._getHeart();
 
     return this._element;
   }

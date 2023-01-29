@@ -22,6 +22,9 @@ export {
   linkAddImg,
   profileAvatar,
   popupRemove,
+  profileAvatarEdit,
+  popupEditAvatarForm,
+  formEditAvatar,
 };
 const validationData = {
   formSelector: ".form",
@@ -41,6 +44,7 @@ const profileName = profile.querySelector(".profile__name");
 const profileDescription = profile.querySelector(".profile__description");
 const profileEditButton = profile.querySelector(".profile__editbutton");
 const profileAvatar = profile.querySelector(".profile__avatar");
+const profileAvatarEdit = profile.querySelector(".profile__avatar-edit");
 
 const formEdit = document.forms.form;
 const nameInput = formEdit.elements.name;
@@ -51,6 +55,8 @@ const nameAddImg = formAdd.elements.nameAdd;
 const linkAddImg = formAdd.elements.link;
 
 const popupRemove = document.querySelector("#popupRemove");
+const popupEditAvatarForm = document.querySelector("#popupEditAvatarForm");
+const formEditAvatar = document.forms.editAvatarForm;
 
 const popupOpen = document.querySelector(".popup__opened");
 const mestoButtonAdd = profile.querySelector(".profile__button");

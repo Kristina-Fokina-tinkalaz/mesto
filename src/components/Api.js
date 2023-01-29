@@ -6,9 +6,16 @@ export class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}` + `/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getUserData() {
@@ -16,9 +23,14 @@ export class Api {
       headers: this._headers,
     })
       .then((res) => {
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
       })
-      .catch((err) => console.log("Ошибка"));
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   saveEditData(dataName, dataAbout) {
@@ -31,9 +43,12 @@ export class Api {
       }),
     })
       .then((res) => {
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
       })
-      .catch((err) => console.log("Ошибка"));
+      .catch((err) => console.log(err));
   }
   addNewCard(cardName, cardLink) {
     return fetch(`${this._baseUrl}` + `/cards`, {
@@ -43,9 +58,14 @@ export class Api {
         name: cardName,
         link: cardLink,
       }),
-    }).then((res) => {
-      return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
   }
 
   removeCard(cardId) {
@@ -55,6 +75,55 @@ export class Api {
       body: JSON.stringify({
         _id: cardId,
       }),
-    }).then((res) => res.json());
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}` + `/cards/` + `${cardId}` + `/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+  deleteLike(cardId) {
+    return fetch(`${this._baseUrl}` + `/cards/` + `${cardId}` + `/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
+  }
+  changeAvatar(avatar) {
+    return fetch(`${this._baseUrl}` + `/users/me/avatar`, {
+      headers: this._headers,
+      method: "PATCH",
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+      .catch((err) => console.log(err));
   }
 }

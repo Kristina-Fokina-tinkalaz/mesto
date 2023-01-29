@@ -16,6 +16,9 @@
 @import url(./blocks/profile/__editbutton/profile__editbutton.css);
 @import url(./blocks/profile/__description/profile__description.css);
 @import url(./blocks/profile/__button/profile__button.css);
+@import url(./blocks/profile/__avatar-edit/profile__avatar-edit.css);
+@import url(./blocks/profile/_user-avatar/profile__user-avatar.css);
+@import url(./blocks/profile/__avatar-edit-point/profile__avatar-edit-point.css);
 
 @import url(./blocks/cards/cards.css);
 @import url(./blocks/card/card.css);
@@ -49,5 +52,6 @@
 @import url(./blocks/form/__massage-correct/form__massage-correct.css);
 @import url(./blocks/form/__massage-error/form__massage-error.css);
 @import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__button-download/form__button-download.css);
 
 @import url(./blocks/close-icon/close-icon.css);

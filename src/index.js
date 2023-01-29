@@ -20,8 +20,10 @@ import {
   nameAddImg,
   linkAddImg,
   profileAvatar,
-  buttonsTrash,
   popupRemove,
+  profileAvatarEdit,
+  popupEditAvatarForm,
+  formEditAvatar,
 } from "./utils/constants.js";
 
 import { UserInfo } from "./components/UserInfo.js";
@@ -47,11 +49,13 @@ const itemsApi = api.getInitialCards();
 
 const newPopupWithImage = new PopupWithImage(popupImg);
 
-function generateNewCard(form_link, form_name, cardId, userId) {
+function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
   const newCard = new Card(
     form_link,
     form_name,
     cardId,
+    arrayLikes,
+    userId,
     ".cards",
     () => {
       newPopupWithImage.open(form_name, form_link);
@@ -64,6 +68,26 @@ function generateNewCard(form_link, form_name, cardId, userId) {
       });
       newPopupRemoveCard.open();
       newPopupRemoveCard.setEventListeners();
+    },
+    (evt) => {
+      if (evt.target.classList.contains("card__heart_change")) {
+        api.deleteLike(cardId).then((data) => {
+          newCard.deleteLike(data);
+          console.log(data);
+        });
+      } else {
+        api.addLike(cardId).then((data) => {
+          newCard.addLike(data);
+          console.log(data);
+        });
+      }
+    },
+    () => {
+      if (arrayLikes.some((item) => (item._id = userId))) {
+        newCard.activeLike();
+      } else {
+        newCard.noLike();
+      }
     }
   );
 
@@ -93,6 +117,7 @@ itemsApi.then((data) => {
           link: item.link,
           id: item._id,
           user: item.owner._id,
+          likes: item.likes,
         };
       }),
       renderer: (item) => {
@@ -100,8 +125,10 @@ itemsApi.then((data) => {
           item.link,
           item.name,
           item.id,
-          item.user
+          item.user,
+          item.likes
         );
+
         newSections.addItems(cardReturn);
       },
     },
@@ -112,6 +139,10 @@ itemsApi.then((data) => {
 
 const newValidFormAdd = new FormValidator(validationData, formAdd);
 const newValidFormEdit = new FormValidator(validationData, formEdit);
+const newValidFormEditAvatar = new FormValidator(
+  validationData,
+  formEditAvatar
+);
 
 const newUserInfo = new UserInfo({
   name: profileName,
@@ -120,7 +151,34 @@ const newUserInfo = new UserInfo({
 
 const newPopupWithEditForm = new PopupWithForm(popupEdit, ({ name, info }) => {
   newUserInfo.setUserInfo({ name: nameInput.value, info: jobInput.value });
-  api.saveEditData(nameInput.value, jobInput.value);
+  newPopupWithEditForm.renderLoading(true);
+
+  api.saveEditData(nameInput.value, jobInput.value).finally(() => {
+    newPopupWithEditForm.renderLoading(false);
+  });
+});
+
+const newPopupWithEditAvatar = new PopupWithForm(
+  popupEditAvatarForm,
+  ({ link }) => {
+    newPopupWithEditAvatar.renderLoading(true);
+    api
+      .changeAvatar(link)
+      .then((res) => {
+        profileAvatar.src = res.avatar;
+      })
+      .finally(() => {
+        newPopupWithEditAvatar.renderLoading(false);
+      });
+  }
+);
+profileAvatarEdit.addEventListener("click", () => {
+  formEditAvatar.reset();
+
+  newPopupWithEditAvatar.open();
+
+  newValidFormEditAvatar.hideFormErrors();
+  newValidFormEditAvatar.disablButton();
 });
 
 profileEditButton.addEventListener("click", () => {
@@ -143,15 +201,24 @@ const newSection = new Section(
 );
 
 const newPopupWithAddForm = new PopupWithForm(popupAdd, ({ nameAdd, link }) => {
-  api.addNewCard(nameAdd, link).then((res) => {
-    const cardReturn = generateNewCard(
-      res.link,
-      res.name,
-      res._id,
-      res.owner._id
-    );
-    newSection.addItem(cardReturn);
-  });
+  newPopupWithAddForm.renderLoading(true);
+
+  api
+    .addNewCard(nameAdd, link)
+    .then((res) => {
+      const cardReturn = generateNewCard(
+        res.link,
+        res.name,
+        res._id,
+        res.owner._id, //res.owner._id
+        res.likes
+      );
+
+      newSection.addItem(cardReturn);
+    })
+    .finally(() => {
+      newPopupWithAddForm.renderLoading(false);
+    });
 });
 
 mestoButtonAdd.addEventListener("click", () => {
@@ -166,3 +233,5 @@ newValidFormAdd.enableValidation();
 newValidFormEdit.enableValidation();
 newPopupWithAddForm.setEventListeners();
 newPopupWithImage.setEventListeners();
+newPopupWithEditAvatar.setEventListeners();
+newValidFormEditAvatar.enableValidation();

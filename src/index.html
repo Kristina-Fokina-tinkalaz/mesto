@@ -17,7 +17,16 @@
       </header>
       <main class="main">
         <div class="profile">
-          <img class="profile__avatar" alt="Аватарка" />
+          <div class="profile__user-avatar">
+            <img class="profile__avatar" alt="Аватарка" />
+            <div class="profile__avatar-edit">
+              <img
+                class="profile__avatar-edit-point"
+                src="<%=require('./images/userEditAvatar.png')%>"
+                alt="avatar-edit"
+              />
+            </div>
+          </div>
           <div class="profile__info">
             <h1 class="profile__name"></h1>
             <button type="button" class="profile__editbutton"></button>
@@ -33,7 +42,7 @@
                 <h2 class="card__text"></h2>
                 <div class="card__number-heart">
                   <button type="button" class="card__heart"></button>
-                  <div class="card__number">0</div>
+                  <div class="card__number"></div>
                 </div>
               </div>
               <img
@@ -153,6 +162,29 @@
           <button type="reset" class="close-icon"></button>
         </form>
       </div>
+      <div class="popup overlay-light" id="popupEditAvatarForm">
+        <form name="editAvatarForm" class="form" method="get" id="EditAvatarForm" action="index.html" novalidate>
+              <h2 class="form__title">Обновить аватар</h2>
+              <div class="form__container">
+              <input
+              class="form__input"
+              type="url"
+              name="link"
+              id="link"
+              placeholder="Ссылка на картинку"
+              required
+              /><span class="form__input-correct" id="link-error"></span>
+              </div>
+              <button
+              name="button"
+              type="submit"
+              class="form__button form__button_disabled"
+              disabled
+              >
+              Сохранить
+              </button>
+              <button type="reset" class="close-icon"></button>
+        </form>
     </div>
   </body>
 </html>

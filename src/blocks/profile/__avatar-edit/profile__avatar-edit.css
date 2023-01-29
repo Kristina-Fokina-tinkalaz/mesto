@@ -1,0 +1,15 @@
+.profile__avatar-edit {
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.profile__user-avatar:hover .profile__avatar-edit {
+  display: flex;
+  cursor: pointer;
+}
