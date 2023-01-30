@@ -29,7 +29,7 @@ import {
 import { UserInfo } from "./components/UserInfo.js";
 import { PopupWithForm } from "./components/PopupWithForm.js";
 import { PopupWithImage } from "./components/PopupWithImage.js";
-import { PopupWithOneQuestion } from "./components/PopupWithOneQuestion.js";
+import { PopupConfirmation } from "./components/PopupConfirmation.js";
 export { newValidFormAdd, newValidFormEdit, generateNewCard };
 import { Api } from "./components/Api.js";
 
@@ -43,13 +43,22 @@ const api = new Api({
   },
 });
 
-api.getUserData();
-
 const itemsApi = api.getInitialCards();
 
 const newPopupWithImage = new PopupWithImage(popupImg);
 
 function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
+  const popupWithConfirmation = new PopupConfirmation(popupRemove, () => {
+    api
+      .removeCard(cardId)
+      .then(() => {
+        newCard.deleteCard();
+        popupWithConfirmation.close();
+      })
+      .catch((err) => console.log(err));
+  });
+  popupWithConfirmation.setEventListeners();
+
   const newCard = new Card(
     form_link,
     form_name,
@@ -61,86 +70,87 @@ function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
       newPopupWithImage.open(form_name, form_link);
     },
     () => {
-      const newPopupRemoveCard = new PopupWithOneQuestion(popupRemove, () => {
-        api.removeCard(cardId).then(() => {
-          newCard.deleteCard();
-        });
-      });
-      newPopupRemoveCard.open();
-      newPopupRemoveCard.setEventListeners();
+      popupWithConfirmation.open();
     },
     (evt) => {
       if (evt.target.classList.contains("card__heart_change")) {
-        api.deleteLike(cardId).then((data) => {
-          newCard.deleteLike(data);
-          console.log(data);
-        });
+        api
+          .deleteLike(cardId)
+          .then((data) => {
+            newCard.deleteLike(data);
+            console.log(data);
+          })
+          .catch((err) => console.log(err));
       } else {
-        api.addLike(cardId).then((data) => {
-          newCard.addLike(data);
-          console.log(data);
-        });
+        api
+          .addLike(cardId)
+          .then((data) => {
+            newCard.addLike(data);
+            console.log(data);
+          })
+          .catch((err) => console.log(err));
       }
     },
     () => {
-      console.log(arrayLikes);
-      if (
-        arrayLikes.some((item) => {
-          item._id && item._id == userId;
-        })
-      ) {
+      if (arrayLikes.some((item) => item._id === profileName.id)) {
+        console.log(arrayLikes);
         newCard.activeLike();
       } else {
+        console.log(arrayLikes);
         newCard.noLike();
       }
     }
   );
 
   const cardReturn = newCard.createCard();
-  userApi.then((data) => {
-    if (userId != data._id) {
-      const trashButton = cardReturn.querySelector(".card__trash");
-      trashButton.remove();
-    }
-  });
-
+  if (userId != profileName.id) {
+    const trashButton = cardReturn.querySelector(".card__trash");
+    trashButton.remove();
+  }
   return cardReturn;
 }
-const userApi = api.getUserData();
-userApi.then((data) => {
-  profileName.textContent = data.name;
-  profileDescription.textContent = data.about;
-  profileAvatar.src = data.avatar;
-});
+api
+  .getUserData()
+  .then((data) => {
+    profileName.textContent = data.name;
+    profileDescription.textContent = data.about;
+    profileAvatar.src = data.avatar;
+    profileName.id = data._id;
+    return data;
+  })
+  .catch((err) => console.log(err));
 
-itemsApi.then((data) => {
-  const newSections = new Section(
-    {
-      items: data.map((item) => {
-        return {
-          name: item.name,
-          link: item.link,
-          id: item._id,
-          user: item.owner._id,
-          likes: item.likes,
-        };
-      }),
-      renderer: (item) => {
-        const cardReturn = generateNewCard(
-          item.link,
-          item.name,
-          item.id,
-          item.user,
-          item.likes
-        );
+itemsApi
+  .then((data) => {
+    const sectionInitialCards = new Section(
+      {
+        items: data.map((item) => {
+          return {
+            name: item.name,
+            link: item.link,
+            id: item._id,
+            user: item.owner._id,
+            likes: item.likes,
+          };
+        }),
+        renderer: (item) => {
+          const cardReturn = generateNewCard(
+            item.link,
+            item.name,
+            item.id,
+            item.user,
+            item.likes
+          );
 
-        newSections.addItems(cardReturn);
+          sectionInitialCards.appendItem(cardReturn);
+        },
       },
-    },
-    cardTemplateElement
-  );
-  newSections.renderItems();
-});
+      cardTemplateElement
+    );
+
+    sectionInitialCards.renderItems();
+  })
+  .catch((err) => console.log(err));
 
 const newValidFormAdd = new FormValidator(validationData, formAdd);
 const newValidFormEdit = new FormValidator(validationData, formEdit);
@@ -155,12 +165,19 @@ const newUserInfo = new UserInfo({
 });
 
 const newPopupWithEditForm = new PopupWithForm(popupEdit, ({ name, info }) => {
-  newUserInfo.setUserInfo({ name: nameInput.value, info: jobInput.value });
   newPopupWithEditForm.renderLoading(true);
+  api
+    .saveEditData(nameInput.value, jobInput.value)
+    .then((res) => {
+      newUserInfo.setUserInfo({ name: nameInput.value, info: jobInput.value });
 
-  api.saveEditData(nameInput.value, jobInput.value).finally(() => {
-    newPopupWithEditForm.renderLoading(false);
-  });
+      newPopupWithEditForm.close();
+      return res.json();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      newPopupWithEditForm.renderLoading(false);
+    });
 });
 
 const newPopupWithEditAvatar = new PopupWithForm(
@@ -171,7 +188,9 @@ const newPopupWithEditAvatar = new PopupWithForm(
       .changeAvatar(link_avatar)
       .then((res) => {
         profileAvatar.src = res.avatar;
+        newPopupWithEditAvatar.close();
       })
+      .catch((err) => console.log(err))
       .finally(() => {
         newPopupWithEditAvatar.renderLoading(false);
       });
@@ -220,7 +239,9 @@ const newPopupWithAddForm = new PopupWithForm(popupAdd, ({ nameAdd, link }) => {
       );
 
       newSection.addItem(cardReturn);
+      newPopupWithAddForm.close();
     })
+    .catch((err) => console.log(err))
     .finally(() => {
       newPopupWithAddForm.renderLoading(false);
     });

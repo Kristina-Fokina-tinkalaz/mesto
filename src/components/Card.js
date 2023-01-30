@@ -50,7 +50,6 @@ class Card {
   addLike(data) {
     this._likes = this._element.querySelector(".card__number");
     this._likes.textContent = data.likes.length;
-
     this.activeLike();
   }
   deleteLike(data) {

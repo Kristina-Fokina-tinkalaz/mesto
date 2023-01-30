@@ -6,7 +6,7 @@ class Section {
     this._container = containerSelector;
   }
 
-  addItems(element) {
+  appendItem(element) {
     this._container.append(element);
   }
   addItem(element) {

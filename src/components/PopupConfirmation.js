@@ -1,7 +1,7 @@
 import { Popup } from "./Popup.js";
-export { PopupWithOneQuestion };
+export { PopupConfirmation };
 
-class PopupWithOneQuestion extends Popup {
+class PopupConfirmation extends Popup {
   constructor(popup, submit) {
     super(popup);
 
@@ -13,7 +13,7 @@ class PopupWithOneQuestion extends Popup {
     this._popup.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submit();
-      this.close();
+      // this.close();
     });
   }
 }
