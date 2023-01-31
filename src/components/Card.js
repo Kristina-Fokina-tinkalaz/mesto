@@ -9,7 +9,7 @@ class Card {
     userId,
     templateSelector,
     handleCardClick,
-    deleteCard,
+    deleteCardClick,
     changeHeartApi,
     getHeart
   ) {
@@ -25,7 +25,7 @@ class Card {
     this._cardTrashSelector = ".card__trash";
     this._cardTextSelector = ".card__text";
     this._handleCardClick = handleCardClick;
-    this._deleteCard = deleteCard;
+    this._deleteCardClick = deleteCardClick;
     this._arrayLikes = arrayLikes;
     this._userId = userId;
     this._changeHeartApi = changeHeartApi;
@@ -68,8 +68,15 @@ class Card {
     heart.addEventListener("click", (evt) => {
       this._changeHeartApi(evt);
     });
-    buttonsTrash.addEventListener("click", this._deleteCard);
+    buttonsTrash.addEventListener("click", this._deleteCardClick);
     this._cardImage.addEventListener("click", this._handleCardClick);
+  }
+
+  removeTrash(profileUser) {
+    if (this._userId != profileUser) {
+      const trashButton = this._element.querySelector(".card__trash");
+      trashButton.remove();
+    }
   }
   createCard() {
     this._element = this._getTemplate();
@@ -79,6 +86,7 @@ class Card {
     this._element.querySelector(this._cardTextSelector).textContent =
       this._title;
     this._element.id = this._cardId;
+
     this._likes = this._element.querySelector(".card__number");
     this._likes.textContent = this._arrayLikes.length;
 

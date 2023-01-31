@@ -8,12 +8,24 @@ class PopupConfirmation extends Popup {
     this._submit = submit;
     this._iconClose = popup.querySelector(".close-icon");
   }
+
   setEventListeners() {
     super.setEventListeners();
-    this._popup.addEventListener("submit", (evt) => {
+
+    this._popup.addEventListener(
+      "submit",
+      (evt) => {
+        evt.preventDefault();
+        this._submit();
+        console.log("добавили событие");
+      },
+      { once: true }
+    );
+  }
+  removeEventListeners() {
+    this._popup.removeEventListener("submit", (evt) => {
       evt.preventDefault();
       this._submit();
-      // this.close();
     });
   }
 }

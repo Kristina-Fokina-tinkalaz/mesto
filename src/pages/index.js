@@ -1,8 +1,8 @@
 import "./index.css";
-import { Card } from "./components/Card.js";
-import { FormValidator } from "./scripts/FormValidator.js";
-import { initialCards } from "./scripts/initialCards.js";
-import { Section } from "./components/Section.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../scripts/FormValidator.js";
+import { initialCards } from "../scripts/initialCards.js";
+import { Section } from "../components/Section.js";
 import {
   popupEdit,
   nameInput,
@@ -24,14 +24,14 @@ import {
   profileAvatarEdit,
   popupEditAvatarForm,
   formEditAvatar,
-} from "./utils/constants.js";
+} from "../utils/constants.js";
 
-import { UserInfo } from "./components/UserInfo.js";
-import { PopupWithForm } from "./components/PopupWithForm.js";
-import { PopupWithImage } from "./components/PopupWithImage.js";
-import { PopupConfirmation } from "./components/PopupConfirmation.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupConfirmation } from "../components/PopupConfirmation.js";
 export { newValidFormAdd, newValidFormEdit, generateNewCard };
-import { Api } from "./components/Api.js";
+import { Api } from "../components/Api.js";
 
 export { api };
 
@@ -43,11 +43,16 @@ const api = new Api({
   },
 });
 
-const itemsApi = api.getInitialCards();
-
 const newPopupWithImage = new PopupWithImage(popupImg);
 
-function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
+function generateNewCard(
+  form_link,
+  form_name,
+  cardId,
+  userId,
+  arrayLikes,
+  UserIdMe
+) {
   const popupWithConfirmation = new PopupConfirmation(popupRemove, () => {
     api
       .removeCard(cardId)
@@ -57,7 +62,6 @@ function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
       })
       .catch((err) => console.log(err));
   });
-  popupWithConfirmation.setEventListeners();
 
   const newCard = new Card(
     form_link,
@@ -71,6 +75,7 @@ function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
     },
     () => {
       popupWithConfirmation.open();
+      popupWithConfirmation.setEventListeners();
     },
     (evt) => {
       if (evt.target.classList.contains("card__heart_change")) {
@@ -78,7 +83,6 @@ function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
           .deleteLike(cardId)
           .then((data) => {
             newCard.deleteLike(data);
-            console.log(data);
           })
           .catch((err) => console.log(err));
       } else {
@@ -86,45 +90,39 @@ function generateNewCard(form_link, form_name, cardId, userId, arrayLikes) {
           .addLike(cardId)
           .then((data) => {
             newCard.addLike(data);
-            console.log(data);
           })
           .catch((err) => console.log(err));
       }
     },
     () => {
-      if (arrayLikes.some((item) => item._id === profileName.id)) {
-        console.log(arrayLikes);
+      if (arrayLikes.some((item) => item._id === UserIdMe)) {
         newCard.activeLike();
       } else {
-        console.log(arrayLikes);
         newCard.noLike();
       }
     }
   );
 
   const cardReturn = newCard.createCard();
-  if (userId != profileName.id) {
-    const trashButton = cardReturn.querySelector(".card__trash");
-    trashButton.remove();
-  }
+  newCard.removeTrash(UserIdMe);
+
   return cardReturn;
 }
-api
-  .getUserData()
-  .then((data) => {
-    profileName.textContent = data.name;
-    profileDescription.textContent = data.about;
-    profileAvatar.src = data.avatar;
-    profileName.id = data._id;
-    return data;
-  })
-  .catch((err) => console.log(err));
+// api
+//   .getUserData()
+//   .then((data) => {
+//     profileName.textContent = data.name;
+//     profileDescription.textContent = data.about;
+//     profileAvatar.src = data.avatar;
+//     profileName.id = data._id;
+//   })
+//   .catch((err) => console.log(err));
 
-itemsApi
-  .then((data) => {
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([dataUser, dataCards]) => {
     const sectionInitialCards = new Section(
       {
-        items: data.map((item) => {
+        items: dataCards.map((item) => {
           return {
             name: item.name,
             link: item.link,
@@ -139,8 +137,13 @@ itemsApi
             item.name,
             item.id,
             item.user,
-            item.likes
+            item.likes,
+            dataUser._id
           );
+          profileName.textContent = dataUser.name;
+          profileDescription.textContent = dataUser.about;
+          profileAvatar.src = dataUser.avatar;
+          profileName.id = dataUser._id;
 
           sectionInitialCards.appendItem(cardReturn);
         },
@@ -229,13 +232,14 @@ const newPopupWithAddForm = new PopupWithForm(popupAdd, ({ nameAdd, link }) => {
 
   api
     .addNewCard(nameAdd, link)
-    .then((res) => {
+    .then((dataCard) => {
       const cardReturn = generateNewCard(
-        res.link,
-        res.name,
-        res._id,
-        res.owner._id,
-        res.likes
+        dataCard.link,
+        dataCard.name,
+        dataCard._id,
+        dataCard.owner._id,
+        dataCard.likes,
+        profileName.id
       );
 
       newSection.addItem(cardReturn);
